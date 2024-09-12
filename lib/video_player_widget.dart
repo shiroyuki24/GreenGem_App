@@ -4,8 +4,9 @@ import 'package:connectivity_plus/connectivity_plus.dart';
 
 class VideoPlayerWidget extends StatefulWidget {
   final String video_url;
+  final String eng_name;
 
-  VideoPlayerWidget({required this.video_url});
+  VideoPlayerWidget({required this.video_url, required this.eng_name});
 
   @override
   _VideoPlayerWidgetState createState() => _VideoPlayerWidgetState();
@@ -33,6 +34,7 @@ class _VideoPlayerWidgetState extends State<VideoPlayerWidget> {
           flags: YoutubePlayerFlags(
             autoPlay: false,
             mute: false,
+            isLive: false,
           ),
         );
       }
@@ -47,36 +49,56 @@ class _VideoPlayerWidgetState extends State<VideoPlayerWidget> {
 
   @override
   Widget build(BuildContext context) {
-    return _isConnected
-        ? YoutubePlayerBuilder(
-            player: YoutubePlayer(
-              controller: _controller,
-              showVideoProgressIndicator: true,
-              progressColors: ProgressBarColors(
-                playedColor: Colors.green,
-                handleColor: Colors.greenAccent,
+    return Scaffold(
+      appBar: AppBar(
+        title: Text(widget.eng_name),
+        leading: IconButton(
+          icon: Icon(Icons.arrow_back),
+          onPressed: () {
+            // Delay the pop operation until the current frame is completed
+            WidgetsBinding.instance.addPostFrameCallback((_) {
+              if (mounted) {
+                Navigator.of(context).pop();
+              }
+            });
+          },
+        ),
+        backgroundColor: Colors.green, // Customize the AppBar color as needed
+      ),
+      body: Center(
+        child: _isConnected
+            ? YoutubePlayerBuilder(
+                player: YoutubePlayer(
+                  controller: _controller,
+                  showVideoProgressIndicator: true,
+                  progressColors: ProgressBarColors(
+                    playedColor: Colors.green,
+                    handleColor: Colors.greenAccent,
+                  ),
+                  onReady: () {
+                    _controller.addListener(() {});
+                  },
+                ),
+                builder: (context, player) {
+                  return Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      player,
+                      SizedBox(height: 10),
+                      _buildVolumeControl(),
+                    ],
+                  );
+                },
+              )
+            : Center(
+                child: Text(
+                  'No internet connection. Please connect to the internet to play the video.',
+                  style: TextStyle(fontSize: 16, color: Colors.red),
+                  textAlign: TextAlign.center,
+                ),
               ),
-              onReady: () {
-                _controller.addListener(() {});
-              },
-            ),
-            builder: (context, player) {
-              return Column(
-                children: [
-                  player,
-                  SizedBox(height: 10),
-                  _buildVolumeControl(),
-                ],
-              );
-            },
-          )
-        : Center(
-            child: Text(
-              'No internet connection. Please connect to the internet to play the video.',
-              style: TextStyle(fontSize: 16, color: Colors.red),
-              textAlign: TextAlign.center,
-            ),
-          );
+      ),
+    );
   }
 
   Widget _buildVolumeControl() {

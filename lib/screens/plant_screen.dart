@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:gg_app/models/plants.dart';
-import 'package:gg_app/video_player_widget.dart';
+import 'package:gg_app/screens/video_screen.dart';
 
 class PlantScreen extends StatefulWidget {
   final Plant plant;
@@ -200,8 +200,8 @@ class _PlantScreenState extends State<PlantScreen> {
                                         ? 'Tagalog name: ${widget.plant.tag_name}'
                                         : 'English name: ${widget.plant.eng_name}',
                                     style: TextStyle(
-                                      fontSize: 18,
-                                      fontFamily: 'Montserrat',
+                                      fontSize: 19,
+                                      fontFamily: 'Karla',
                                       fontWeight: FontWeight.bold,
                                       color: Colors.black87,
                                     ),
@@ -210,8 +210,8 @@ class _PlantScreenState extends State<PlantScreen> {
                                   Text(
                                     'Scientific name: ${widget.plant.sci_name}',
                                     style: TextStyle(
-                                      fontSize: 18,
-                                      fontFamily: 'Montserrat',
+                                      fontSize: 19,
+                                      fontFamily: 'Karla',
                                       fontWeight: FontWeight.bold,
                                       color: Colors.black87,
                                     ),
@@ -220,8 +220,8 @@ class _PlantScreenState extends State<PlantScreen> {
                                   Text(
                                     getTextContent(),
                                     style: TextStyle(
-                                      fontSize: 18,
-                                      fontFamily: 'Montserrat',
+                                      fontSize: 19,
+                                      fontFamily: 'Karla',
                                       color: Colors.black87,
                                     ),
                                     textAlign: TextAlign.justify,
@@ -236,8 +236,8 @@ class _PlantScreenState extends State<PlantScreen> {
                                   Text(
                                     getTextContent(),
                                     style: TextStyle(
-                                      fontSize: 18,
-                                      fontFamily: 'Montserrat',
+                                      fontSize: 19,
+                                      fontFamily: 'Karla',
                                       color: Colors.black87,
                                     ),
                                     textAlign: TextAlign.justify,
@@ -258,8 +258,8 @@ class _PlantScreenState extends State<PlantScreen> {
                                   Text(
                                     getBenefits(),
                                     style: TextStyle(
-                                      fontSize: 18,
-                                      fontFamily: 'Montserrat',
+                                      fontSize: 19,
+                                      fontFamily: 'Karla',
                                       color: Colors.black87,
                                     ),
                                     textAlign: TextAlign.justify,
@@ -267,26 +267,65 @@ class _PlantScreenState extends State<PlantScreen> {
                                 ],
                               ),
                             if (_contentState == ContentState.process)
-                              Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  SizedBox(height: 20),
-                                  if (widget.plant.video_url != null)
-                                    VideoPlayerWidget(
-                                      video_url: widget.plant.video_url!,
+                              Center(
+                                child: SizedBox(
+                                  width: MediaQuery.of(context).size.width *
+                                      0.50, // 50% of the screen width
+                                  child: ElevatedButton(
+                                    onPressed: () {
+                                      Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                          builder: (context) =>
+                                              VideoPlayerScreen(
+                                            plant: widget.plant,
+                                            isEnglish: widget.isEnglish,
+                                          ),
+                                        ),
+                                      );
+                                    },
+                                    style: ElevatedButton.styleFrom(
+                                      backgroundColor: Colors.green,
+                                      foregroundColor: Colors.white,
+                                      shape: RoundedRectangleBorder(
+                                        borderRadius: BorderRadius.circular(10),
+                                      ),
+                                      padding: EdgeInsets.symmetric(
+                                          horizontal: 32, vertical: 16),
+                                      shadowColor:
+                                          Colors.black.withOpacity(0.3),
+                                      elevation: 5,
                                     ),
-                                  SizedBox(height: 20),
-                                  Text(
-                                    getTextContent(),
-                                    style: TextStyle(
-                                      fontSize: 18,
-                                      fontFamily: 'Montserrat',
-                                      color: Colors.black87,
+                                    child: Text(
+                                      widget.isEnglish
+                                          ? 'View Video'
+                                          : 'Tignan ang Video',
+                                      style: TextStyle(
+                                        fontFamily: 'Karla',
+                                        fontSize: 19,
+                                        fontWeight: FontWeight.w500,
+                                      ),
+                                      textAlign: TextAlign
+                                          .center, // Center text within button
                                     ),
-                                    textAlign: TextAlign.justify,
                                   ),
-                                ],
+                                ),
                               ),
+                            Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                SizedBox(height: 20),
+                                Text(
+                                  getTextContent(),
+                                  style: TextStyle(
+                                    fontSize: 19,
+                                    fontFamily: 'Karla',
+                                    color: Colors.black87,
+                                  ),
+                                  textAlign: TextAlign.justify,
+                                ),
+                              ],
+                            ),
                             SizedBox(height: 20),
                             if (_contentState != ContentState.process)
                               Column(
