@@ -272,8 +272,13 @@ class _PlantScreenState extends State<PlantScreen> {
                                   width: MediaQuery.of(context).size.width *
                                       0.50, // 50% of the screen width
                                   child: ElevatedButton(
-                                    onPressed: () {
-                                      Navigator.push(
+                                    onPressed: () async {
+                                      // Save the current state before navigating to the video player
+                                      ContentState previousState =
+                                          _contentState;
+
+                                      // Navigate to the VideoPlayerScreen
+                                      await Navigator.push(
                                         context,
                                         MaterialPageRoute(
                                           builder: (context) =>
@@ -283,6 +288,11 @@ class _PlantScreenState extends State<PlantScreen> {
                                           ),
                                         ),
                                       );
+
+                                      // Restore the state after returning from the VideoPlayerScreen
+                                      setState(() {
+                                        _contentState = previousState;
+                                      });
                                     },
                                     style: ElevatedButton.styleFrom(
                                       backgroundColor: Colors.green,

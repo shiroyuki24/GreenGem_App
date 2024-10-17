@@ -5,7 +5,7 @@ Bashful Mimosa
 Bitter Melon
 Black Plum
 Blue Pea
-Bluemea Camphor
+Bluea Camphor
 Bottle Gourd
 Broccoli
 Calamondin
@@ -18,7 +18,7 @@ Dandelion
 Dragon Fruit
 False Garlic
 Fan Palm
-Five Leaf Chaste Tree
+Five-Leaf Chaste Tree
 Galip Nut
 Garlic
 Ginger
@@ -32,7 +32,7 @@ Lead Tree
 Mango
 Mangosteen
 Manila Hemp
-Miracle Plant
+Miracle plant
 Moringa
 Morning Glory
 Mulberry

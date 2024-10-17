@@ -101,11 +101,11 @@ class _HomeScreenState extends State<HomeScreen> {
           Column(
             children: [
               Container(
-                height: MediaQuery.of(context).size.height * 0.39,
+                height: MediaQuery.of(context).size.height * 0.41,
                 color: Colors.black,
               ),
               Container(
-                height: MediaQuery.of(context).size.height * 0.61,
+                height: MediaQuery.of(context).size.height * 0.59,
                 decoration: BoxDecoration(
                   color: Colors.white,
                   borderRadius: BorderRadius.only(
@@ -223,34 +223,6 @@ class _HomeScreenState extends State<HomeScreen> {
                     ),
                   ],
                 ),
-                if (searchResults.isNotEmpty)
-                  Container(
-                    margin: EdgeInsets.only(top: 10),
-                    decoration: BoxDecoration(
-                      color: Colors.white,
-                      borderRadius: BorderRadius.circular(10),
-                      boxShadow: [
-                        BoxShadow(
-                          color: Colors.black.withOpacity(0.2),
-                          spreadRadius: 2,
-                          blurRadius: 4,
-                          offset: Offset(0, 2),
-                        ),
-                      ],
-                    ),
-                    child: ListView.builder(
-                      shrinkWrap: true,
-                      itemCount: searchResults.length,
-                      itemBuilder: (context, index) {
-                        return ListTile(
-                          title: Text(searchResults[index].eng_name),
-                          onTap: () {
-                            navigateToPlant(searchResults[index]);
-                          },
-                        );
-                      },
-                    ),
-                  ),
                 SizedBox(height: 20),
                 Container(
                   width: double.infinity,
@@ -357,6 +329,38 @@ class _HomeScreenState extends State<HomeScreen> {
               ],
             ),
           ),
+          // Positioned Dropdown (search results)
+          if (searchResults.isNotEmpty)
+            Positioned(
+              top: MediaQuery.of(context).padding.top +
+                  kToolbarHeight +
+                  150, // Adjusted to place below search bar
+              left: 16,
+              right: 16,
+              child: Material(
+                elevation: 5,
+                borderRadius: BorderRadius.circular(10),
+                child: Container(
+                  decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                  height: 250, // Fixed height for scrollable content
+                  child: ListView.builder(
+                    padding: EdgeInsets.zero,
+                    itemCount: searchResults.length,
+                    itemBuilder: (context, index) {
+                      return ListTile(
+                        title: Text(searchResults[index].eng_name),
+                        onTap: () {
+                          navigateToPlant(searchResults[index]);
+                        },
+                      );
+                    },
+                  ),
+                ),
+              ),
+            ),
         ],
       ),
     );

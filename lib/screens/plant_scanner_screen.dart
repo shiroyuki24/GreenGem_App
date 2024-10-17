@@ -16,7 +16,7 @@ class PlantScanner extends StatefulWidget {
 }
 
 class _PlantScannerState extends State<PlantScanner> {
-  bool _loading = true;
+  bool _loading = false;
   File? _image;
   List? _output = [];
   final picker = ImagePicker();
@@ -53,6 +53,9 @@ class _PlantScannerState extends State<PlantScanner> {
     });
 
     try {
+      // Show the scanning animation
+      await Future.delayed(Duration(seconds: 3));
+
       var output = await Tflite.runModelOnImage(
         path: image.path,
         imageMean: 0.0,
@@ -181,6 +184,7 @@ class _PlantScannerState extends State<PlantScanner> {
 
     setState(() {
       _image = File(image.path);
+      _loading = true; // Start the loading animation after image is picked
     });
 
     classifyImage(_image!);
@@ -192,6 +196,7 @@ class _PlantScannerState extends State<PlantScanner> {
 
     setState(() {
       _image = File(image.path);
+      _loading = true; // Start the loading animation after image is picked
     });
 
     classifyImage(_image!);
@@ -258,41 +263,53 @@ class _PlantScannerState extends State<PlantScanner> {
                 ),
                 SizedBox(height: 40),
                 Center(
-                  child: _loading
-                      ? Container(
-                          width: 350,
-                          child: Column(
-                            children: [
-                              Image.asset('assets/images/logo.png'),
-                              SizedBox(height: 50),
-                            ],
-                          ),
+                  child: !_loading && _image == null
+                      ? Image.asset(
+                          'assets/images/logo.png',
+                          width: MediaQuery.of(context).size.width * 0.6,
                         )
-                      : Container(
-                          child: Column(
-                            children: [
-                              Container(
-                                height: 250,
-                                child: _image != null
-                                    ? Image.file(_image!)
-                                    : Container(),
+                      : _loading
+                          ? Column(
+                              children: [
+                                CircularProgressIndicator(),
+                                SizedBox(height: 20),
+                                Text(
+                                  widget.isEnglish
+                                      ? 'Scanning...'
+                                      : 'Nagsusuri...',
+                                  style: TextStyle(
+                                    fontSize: 18,
+                                    fontWeight: FontWeight.bold,
+                                    color: Colors.green[800],
+                                  ),
+                                ),
+                              ],
+                            )
+                          : Container(
+                              child: Column(
+                                children: [
+                                  Container(
+                                    height: 250,
+                                    child: _image != null
+                                        ? Image.file(_image!)
+                                        : Container(),
+                                  ),
+                                  SizedBox(height: 20),
+                                  _output != null && _output!.isNotEmpty
+                                      ? Column(
+                                          children: _output!.map((result) {
+                                            return Text(
+                                              '${result['label']} - Confidence: ${result['confidence'].toStringAsFixed(2)}',
+                                              style: TextStyle(
+                                                  color: Colors.green[800],
+                                                  fontSize: 20),
+                                            );
+                                          }).toList(),
+                                        )
+                                      : Container(),
+                                ],
                               ),
-                              SizedBox(height: 20),
-                              _output != null && _output!.isNotEmpty
-                                  ? Column(
-                                      children: _output!.map((result) {
-                                        return Text(
-                                          '${result['label']} - Confidence: ${result['confidence'].toStringAsFixed(2)}',
-                                          style: TextStyle(
-                                              color: Colors.green[800],
-                                              fontSize: 20),
-                                        );
-                                      }).toList(),
-                                    )
-                                  : Container(),
-                            ],
-                          ),
-                        ),
+                            ),
                 ),
                 SizedBox(height: 20),
                 Container(
@@ -308,30 +325,25 @@ class _PlantScannerState extends State<PlantScanner> {
                               horizontal: 24, vertical: 17),
                           decoration: BoxDecoration(
                             gradient: LinearGradient(
-                              colors: [Color(0xff205901), Color(0xff7bac31)],
+                              colors: [
+                                Color(0xff205901),
+                                Color(0xff7bac31),
+                              ],
                             ),
-                            borderRadius: BorderRadius.circular(15),
-                            boxShadow: [
-                              BoxShadow(
-                                color: Colors.black.withOpacity(0.2),
-                                spreadRadius: 2,
-                                blurRadius: 4,
-                                offset: Offset(0, 2),
-                              ),
-                            ],
+                            borderRadius: BorderRadius.circular(17),
                           ),
                           child: Text(
                             widget.isEnglish
                                 ? 'Take a Photo'
                                 : 'Kumuha ng Larawan',
                             style: TextStyle(
-                              color: Colors.white,
-                              fontFamily: 'Montserrat',
-                            ),
+                                color: Colors.white,
+                                fontSize: 16,
+                                fontFamily: 'Karla'),
                           ),
                         ),
                       ),
-                      SizedBox(height: 10),
+                      SizedBox(height: 5),
                       GestureDetector(
                         onTap: pickGalleryImage,
                         child: Container(
@@ -341,31 +353,61 @@ class _PlantScannerState extends State<PlantScanner> {
                               horizontal: 24, vertical: 17),
                           decoration: BoxDecoration(
                             gradient: LinearGradient(
-                              colors: [Color(0xff205901), Color(0xff7bac31)],
+                              colors: [
+                                Color(0xff205901),
+                                Color(0xff7bac31),
+                              ],
                             ),
-                            borderRadius: BorderRadius.circular(15),
-                            boxShadow: [
-                              BoxShadow(
-                                color: Colors.black.withOpacity(0.2),
-                                spreadRadius: 2,
-                                blurRadius: 4,
-                                offset: Offset(0, 2),
-                              ),
-                            ],
+                            borderRadius: BorderRadius.circular(17),
                           ),
                           child: Text(
-                            widget.isEnglish ? 'Camera Roll' : 'Galeriya',
+                            widget.isEnglish
+                                ? 'Pick from Gallery'
+                                : 'Pumili mula sa Gallery',
                             style: TextStyle(
-                              color: Colors.white,
-                              fontFamily: 'Montserrat',
-                            ),
+                                color: Colors.white,
+                                fontSize: 16,
+                                fontFamily: 'Karla'),
                           ),
                         ),
                       ),
                     ],
                   ),
                 ),
+                SizedBox(height: 20),
               ],
+            ),
+          ),
+          Positioned(
+            bottom: 0,
+            left: 0,
+            right: 0,
+            child: Container(
+              decoration: BoxDecoration(
+                color: Color(0xFFF5EFE6),
+                borderRadius: BorderRadius.circular(10),
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.black.withOpacity(0.3),
+                    spreadRadius: 2,
+                    blurRadius: 5,
+                    offset: Offset(0, 3),
+                  ),
+                ],
+              ),
+              padding: EdgeInsets.all(16),
+              margin: EdgeInsets.all(16), // Add margin to separate from edges
+              child: Text(
+                widget.isEnglish
+                    ? 'Note: The plant scanner is a helpful tool, but it\'s important to remember that it\'s not always 100% accurate. To achieve the best results, ensure that the plant is well-lit and the background is simple and contrasting to make the plant stand out. Keep the camera steady and focused on the plant, capturing clear views of its key features. If the first scan isn\'t accurate, try scanning the plant again from a different angle or with improved lighting. Always cross-check the results with reliable sources to confirm the plant\'s identification.'
+                    : 'Tandaan: Habang nag-aalok ang GreenGem ng impormasyon tungkol sa mga potensyal na benepisyo sa kalusugan ng mga halamang halaman, hindi ito kapalit ng propesyonal na payong medikal. Mangyaring kumunsulta sa mga propesyonal sa pangangalagang pangkalusugan bago gumamit ng mga herbal na remedyo, lalo na kung mayroon kang mga kondisyong medikal o umiinom ng mga gamot.',
+                style: TextStyle(
+                  fontSize: 12,
+                  fontFamily: 'Montserrat',
+                  color: Colors.black54,
+                ),
+                textAlign: TextAlign.justify,
+              ),
             ),
           ),
         ],
