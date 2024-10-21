@@ -1,17 +1,8 @@
-# gg_app
+GAWA NG BRANCH PAG MAG COCOMMIT, WAG SA MAIN PLS
 
-A new Flutter project.
+-bago gumawa ng changes sa code, gawa ng branch para walang problema sa pagcocommit
+-bago mag commit pacheck niyo muna sakin yung changes para hindi paulit ulit ang commit
+-pag atin ali antindyan consult kayu mu kaku
 
-## Getting Started
+-dave
 
-This project is a starting point for a Flutter application.
-
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
-# gg-app-to-edit
