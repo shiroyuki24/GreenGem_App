@@ -393,7 +393,7 @@ final List<Plant> allPlants = [
     image_path: 'assets/plants/fan-palm.png',
   ),
   Plant(
-    eng_name: 'Five Leaf Chaste',
+    eng_name: 'Five-Leaf Chaste Tree',
     tag_name: 'Lagundi',
     sci_name: 'Vitex Negundo, L',
     description:
@@ -489,7 +489,7 @@ final List<Plant> allPlants = [
   ),
   Plant(
     eng_name: 'Goji Berry',
-    tag_name: 'oji Berry',
+    tag_name: 'Goji Berry',
     sci_name: 'Lycium barbarum',
     description:
         'A plant about 2° high, stem straight, 3–4-angled, with white dots. Leaves lanceolate. Flowers white, in 2-ranked racemes. Calyx inferior, 5 persistent teeth. Corolla, 5 petals somewhat down-curved. Berry small, black when ripe.',
@@ -659,7 +659,7 @@ final List<Plant> allPlants = [
     image_path: 'assets/plants/manila-hemp.png',
   ),
   Plant(
-    eng_name: 'Miracle Plant',
+    eng_name: 'Miracle plant',
     tag_name: 'Katakataka',
     sci_name: 'Kalanchoe Laciniata, DC',
     description:
@@ -923,7 +923,7 @@ final List<Plant> allPlants = [
     image_path: 'assets/plants/sage.png',
   ),
   Plant(
-    eng_name: 'Senna Alata',
+    eng_name: 'Senna alata',
     tag_name: 'Akapulko',
     sci_name: 'Cassia alata, L.',
     description:
@@ -1076,7 +1076,7 @@ final List<Plant> allPlants = [
     image_path: 'assets/plants/turmeric.png',
   ),
   Plant(
-    eng_name: 'Vetiver Grass',
+    eng_name: 'Vertiver Grass',
     tag_name: 'Moras',
     sci_name: 'Chrysopogon Zizanioides',
     description:
@@ -1182,7 +1182,7 @@ final List<Plant> culinaryHerbs = allPlants
           'Star Anise',
           'Taro',
           'Turmeric',
-          'Vetiver Grass',
+          'Vertiver Grass',
           // Add culinary herbs here...
         ].contains(plant.eng_name))
     .toList();
@@ -1257,7 +1257,7 @@ final List<Plant> aromaticOils = allPlants
           'Senna alata',
           'Shiny Bush',
           'Turmeric',
-          'Vetiver Grass',
+          'Vertiver Grass',
           'Water Lily',
           'Weeping fig',
           'Wild Tea',
