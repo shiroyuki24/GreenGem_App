@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart'; // Import the services package
 import 'package:gg_app/models/plants.dart';
-import 'package:gg_app/screens/plant_screen.dart';
 import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 import 'package:connectivity_plus/connectivity_plus.dart';
 
@@ -35,11 +35,14 @@ class _VideoPlayerScreenState extends State<VideoPlayerScreen> {
         _controller = YoutubePlayerController(
           initialVideoId: YoutubePlayer.convertUrlToId(widget.plant.video_url)!,
           flags: YoutubePlayerFlags(
-            autoPlay: false,
+            autoPlay: true, // Set to true for automatic playback
             mute: false,
             isLive: false,
           ),
         );
+
+        // Set the app to full screen
+        SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersive);
       }
     });
   }
@@ -47,17 +50,16 @@ class _VideoPlayerScreenState extends State<VideoPlayerScreen> {
   @override
   void dispose() {
     _controller.dispose();
+    SystemChrome.setEnabledSystemUIMode(SystemUiMode.edgeToEdge); // Restore UI mode when disposing
     super.dispose();
   }
 
   Future<bool> _onWillPop() async {
     if (_controller.value.isFullScreen) {
       _controller.toggleFullScreenMode();
-      return Future.value(
-          false); // Prevents popping the screen when exiting fullscreen
+      return Future.value(false); // Prevents popping the screen when exiting fullscreen
     } else {
-      return Future.value(
-          true); // Allows popping the screen when not in fullscreen
+      return Future.value(true); // Allows popping the screen when not in fullscreen
     }
   }
 
