@@ -266,6 +266,7 @@ class _PlantScreenState extends State<PlantScreen> {
                                   ),
                                 ],
                               ),
+                              SizedBox(height: 20),
                             if (_contentState == ContentState.process)
                               Center(
                                 child: SizedBox(
@@ -415,30 +416,36 @@ class _PlantScreenState extends State<PlantScreen> {
                                 ],
                               ),
                             SizedBox(height: 20),
-                            Container(
-                              decoration: BoxDecoration(
-                                color: Colors.white,
-                                borderRadius: BorderRadius.circular(10),
-                                boxShadow: [
-                                  BoxShadow(
-                                    color: Colors.black.withOpacity(0.3),
-                                    spreadRadius: 2,
-                                    blurRadius: 5,
-                                    offset: Offset(0, 3),
-                                  ),
-                                ],
-                              ),
-                              padding: EdgeInsets.all(16),
-                              child: Text(
-                                widget.isEnglish
-                                    ? 'Note: While GreenGem offers information on the potential health benefits of herbal plants, it is not a substitute for professional medical advice. Please consult healthcare professionals before using herbal remedies, especially if you have existing medical conditions or are taking medications.'
-                                    : 'Tandaan: Habang nag-aalok ang GreenGem ng impormasyon tungkol sa mga potensyal na benepisyo sa kalusugan ng mga halamang halaman, hindi ito kapalit ng propesyonal na payong medikal. Mangyaring kumunsulta sa mga propesyonal sa pangangalagang pangkalusugan bago gumamit ng mga herbal na remedyo, lalo na kung mayroon kang mga kondisyong medikal o umiinom ng mga gamot.',
-                                style: TextStyle(
-                                  fontSize: 14,
-                                  fontFamily: 'Montserrat',
-                                  color: Colors.black54,
+                            Positioned(
+                              bottom: 0,
+                              left: 0,
+                              right: 0,
+                              child: Container(
+                                decoration: BoxDecoration(
+                                  color: Colors.white,
+                                  borderRadius: BorderRadius.circular(10),
+                                  boxShadow: [
+                                    BoxShadow(
+                                      color: Colors.black.withOpacity(0.3),
+                                      spreadRadius: 2,
+                                      blurRadius: 3,
+                                      offset: Offset(0, 3),
+                                    ),
+                                  ],
                                 ),
-                                textAlign: TextAlign.justify,
+                                padding: EdgeInsets.all(8),
+                                margin: EdgeInsets.all(8), // Add margin to separate from edges
+                                child: Text(
+                                  widget.isEnglish
+                                      ? 'Note: The plant scanner is a helpful tool, but it\'s important to remember that it\'s not always 100% accurate. To achieve the best results, ensure that the plant is well-lit and the background is simple and contrasting to make the plant stand out. Keep the camera steady and focused on the plant, capturing clear views of its key features. If the first scan isn\'t accurate, try scanning the plant again from a different angle or with improved lighting. Always cross-check the results with reliable sources to confirm the plant\'s identification.'
+                                      : 'Tandaan: Habang nag-aalok ang GreenGem ng impormasyon tungkol sa mga potensyal na benepisyo sa kalusugan ng mga halamang halaman, hindi ito kapalit ng propesyonal na payong medikal. Mangyaring kumunsulta sa mga propesyonal sa pangangalagang pangkalusugan bago gumamit ng mga herbal na remedyo, lalo na kung mayroon kang mga kondisyong medikal o umiinom ng mga gamot.',
+                                  style: TextStyle(
+                                    fontSize: 12,
+                                    fontFamily: 'Montserrat',
+                                    color: Colors.black54,
+                                  ),
+                                  textAlign: TextAlign.justify,
+                                ),
                               ),
                             ),
                           ],
