@@ -72,14 +72,7 @@ class _VideoPlayerScreenState extends State<VideoPlayerScreen> {
             icon: Icon(Icons.arrow_back),
             onPressed: () async {
               if (await _onWillPop()) {
-                Navigator.of(context).pushReplacement(
-                  MaterialPageRoute(
-                    builder: (context) => PlantScreen(
-                      plant: widget.plant,
-                      isEnglish: widget.isEnglish,
-                    ),
-                  ),
-                );
+                Navigator.pop(context, widget.plant);
               }
             },
           ),

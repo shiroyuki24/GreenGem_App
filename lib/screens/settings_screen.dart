@@ -13,11 +13,11 @@ class SettingsScreen extends StatelessWidget {
           Column(
             children: [
               Container(
-                height: MediaQuery.of(context).size.height * 0.17,
+                height: MediaQuery.of(context).size.height * 0.13,
                 color: Colors.black,
               ),
               Container(
-                height: MediaQuery.of(context).size.height * 0.83,
+                height: MediaQuery.of(context).size.height * 0.87,
                 decoration: BoxDecoration(
                   color: Colors.white,
                   borderRadius: BorderRadius.only(

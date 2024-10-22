@@ -272,26 +272,27 @@ class _PlantScreenState extends State<PlantScreen> {
                                   width: MediaQuery.of(context).size.width *
                                       0.50, // 50% of the screen width
                                   child: ElevatedButton(
-                                    onPressed: () async {
+                                      onPressed: () async {
                                       // Save the current state before navigating to the video player
-                                      ContentState previousState =
-                                          _contentState;
+                                      ContentState previousState = _contentState;
 
                                       // Navigate to the VideoPlayerScreen
                                       await Navigator.push(
                                         context,
                                         MaterialPageRoute(
-                                          builder: (context) =>
-                                              VideoPlayerScreen(
+                                          builder: (context) => VideoPlayerScreen(
                                             plant: widget.plant,
                                             isEnglish: widget.isEnglish,
                                           ),
                                         ),
-                                      );
-
-                                      // Restore the state after returning from the VideoPlayerScreen
-                                      setState(() {
-                                        _contentState = previousState;
+                                      ).then((returnedPlant) {
+                                        // Check if a valid value was returned
+                                        if (returnedPlant != null) {
+                                          // Restore the previous state after returning from the VideoPlayerScreen
+                                          setState(() {
+                                            _contentState = previousState; // Restore the previous state
+                                          });
+                                        }
                                       });
                                     },
                                     style: ElevatedButton.styleFrom(
