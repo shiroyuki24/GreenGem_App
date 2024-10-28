@@ -46,7 +46,7 @@ final List<Plant> allPlants = [
         'Narito ang ilang tip para sa pagsasama ng asparagus sa pagkain:\n\n• I-steam ang buong asparagus sa loob ng 5 minuto, pagkatapos ay magdagdag ng tinadtad na bawang at isang ambon ng langis ng oliba.\n• Magdagdag ng isang dakot ng sariwang asparagus sa isang omelet o scramble.\ n• Igisa ang asparagus sa kaunting olive oil at tinadtad na bawang. Timplahan ito ng sariwang giniling na black pepper at isang sprinkle ng bagong gadgad na Parmesan cheese.\n• Magdagdag ng tinadtad na asparagus sa isang salad o wrap.\n• Maglagay ng asparagus sa isang malaking piraso ng aluminum foil. Magdagdag ng lemon juice at isang ambon ng langis ng oliba, balutin ang mga gulay sa foil at ihurno ang mga ito sa loob ng 20 minuto sa 400°F, o hanggang sa maabot ng asparagus ang ninanais na lambot.',
     video_url: 'https://www.youtube.com/watch?v=zx3X3gT8tTM',
     image_path: 'assets/plants/asparagus.png',
-  ),
+  ),gi
   Plant(
     eng_name: 'Avocado',
     tag_name: 'Abukado',
