@@ -54,7 +54,7 @@ class _PlantScannerState extends State<PlantScanner> {
 
     try {
       // Show the scanning animation
-      await Future.delayed(Duration(seconds: 3));
+      await Future.delayed(Duration(seconds: 1));
 
       var output = await Tflite.runModelOnImage(
         path: image.path,

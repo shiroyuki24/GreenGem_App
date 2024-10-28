@@ -99,6 +99,7 @@ class _PlantScreenState extends State<PlantScreen> {
     return Scaffold(
       body: Stack(
         children: [
+          // Plant image container with Hero animation
           Positioned(
             top: 0,
             left: 0,
@@ -125,6 +126,8 @@ class _PlantScreenState extends State<PlantScreen> {
               ),
             ),
           ),
+
+          // Main content container
           Positioned(
             bottom: 0,
             left: 0,
@@ -143,6 +146,7 @@ class _PlantScreenState extends State<PlantScreen> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
+                    // Back button and plant name
                     Row(
                       children: [
                         IconButton(
@@ -163,6 +167,8 @@ class _PlantScreenState extends State<PlantScreen> {
                         ),
                       ],
                     ),
+
+                    // Scrollable content
                     Expanded(
                       child: SingleChildScrollView(
                         controller: _scrollController,
@@ -170,6 +176,8 @@ class _PlantScreenState extends State<PlantScreen> {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             SizedBox(height: 20),
+
+                            // Content title
                             Text(
                               _contentState == ContentState.description
                                   ? (widget.isEnglish
@@ -190,6 +198,8 @@ class _PlantScreenState extends State<PlantScreen> {
                                 fontFamily: 'Montserrat',
                               ),
                             ),
+
+                            // Description content
                             if (_contentState == ContentState.description)
                               Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -228,6 +238,8 @@ class _PlantScreenState extends State<PlantScreen> {
                                   ),
                                 ],
                               ),
+
+                            // Uses & Benefits content
                             if (_contentState == ContentState.usesAndBenefits)
                               Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -266,79 +278,92 @@ class _PlantScreenState extends State<PlantScreen> {
                                   ),
                                 ],
                               ),
-                              SizedBox(height: 20),
-                            if (_contentState == ContentState.process)
-                              Center(
-                                child: SizedBox(
-                                  width: MediaQuery.of(context).size.width *
-                                      0.50, // 50% of the screen width
-                                  child: ElevatedButton(
-                                      onPressed: () async {
-                                      // Save the current state before navigating to the video player
-                                      ContentState previousState = _contentState;
 
-                                      // Navigate to the VideoPlayerScreen
-                                      await Navigator.push(
-                                        context,
-                                        MaterialPageRoute(
-                                          builder: (context) => VideoPlayerScreen(
-                                            plant: widget.plant,
-                                            isEnglish: widget.isEnglish,
-                                          ),
-                                        ),
-                                      ).then((returnedPlant) {
-                                        // Check if a valid value was returned
-                                        if (returnedPlant != null) {
-                                          // Restore the previous state after returning from the VideoPlayerScreen
-                                          setState(() {
-                                            _contentState = previousState; // Restore the previous state
-                                          });
-                                        }
-                                      });
-                                    },
-                                    style: ElevatedButton.styleFrom(
-                                      backgroundColor: Colors.green,
-                                      foregroundColor: Colors.white,
-                                      shape: RoundedRectangleBorder(
-                                        borderRadius: BorderRadius.circular(10),
-                                      ),
-                                      padding: EdgeInsets.symmetric(
-                                          horizontal: 32, vertical: 16),
-                                      shadowColor:
-                                          Colors.black.withOpacity(0.3),
-                                      elevation: 5,
-                                    ),
+                            // Process content
+                            if (_contentState == ContentState.process)
+                              Column(
+                                children: [
+                                  // Display the process text
+                                  Padding(
+                                    padding: const EdgeInsets.symmetric(
+                                        horizontal: 16.0),
                                     child: Text(
-                                      widget.isEnglish
-                                          ? 'View Video'
-                                          : 'Tignan ang Video',
+                                      getTextContent(),
                                       style: TextStyle(
                                         fontFamily: 'Karla',
-                                        fontSize: 19,
-                                        fontWeight: FontWeight.w500,
+                                        fontSize: 16,
+                                        fontWeight: FontWeight.w400,
                                       ),
-                                      textAlign: TextAlign
-                                          .center, // Center text within button
+                                      textAlign: TextAlign.justify,
                                     ),
                                   ),
-                                ),
-                              ),
-                            Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                SizedBox(height: 20),
-                                Text(
-                                  getTextContent(),
-                                  style: TextStyle(
-                                    fontSize: 19,
-                                    fontFamily: 'Karla',
-                                    color: Colors.black87,
+
+                                  SizedBox(
+                                      height:
+                                          20), // Add space between text and button
+
+                                  // View Video button
+                                  Center(
+                                    child: SizedBox(
+                                      width: MediaQuery.of(context).size.width *
+                                          0.50,
+                                      child: ElevatedButton(
+                                        onPressed: () async {
+                                          // Save the current state before navigating to the video player
+                                          ContentState previousState =
+                                              _contentState;
+
+                                          // Navigate to the VideoPlayerScreen
+                                          await Navigator.push(
+                                            context,
+                                            MaterialPageRoute(
+                                              builder: (context) =>
+                                                  VideoPlayerScreen(
+                                                plant: widget.plant,
+                                                isEnglish: widget.isEnglish,
+                                              ),
+                                            ),
+                                          ).then((returnedPlant) {
+                                            if (returnedPlant != null) {
+                                              setState(() {
+                                                _contentState = previousState;
+                                              });
+                                            }
+                                          });
+                                        },
+                                        style: ElevatedButton.styleFrom(
+                                          backgroundColor: Colors.green,
+                                          foregroundColor: Colors.white,
+                                          shape: RoundedRectangleBorder(
+                                            borderRadius:
+                                                BorderRadius.circular(10),
+                                          ),
+                                          padding: EdgeInsets.symmetric(
+                                              horizontal: 32, vertical: 16),
+                                          shadowColor:
+                                              Colors.black.withOpacity(0.3),
+                                          elevation: 5,
+                                        ),
+                                        child: Text(
+                                          widget.isEnglish
+                                              ? 'View Video'
+                                              : 'Tignan ang Video',
+                                          style: TextStyle(
+                                            fontFamily: 'Karla',
+                                            fontSize: 19,
+                                            fontWeight: FontWeight.w500,
+                                          ),
+                                          textAlign: TextAlign.center,
+                                        ),
+                                      ),
+                                    ),
                                   ),
-                                  textAlign: TextAlign.justify,
-                                ),
-                              ],
-                            ),
+                                ],
+                              ),
+
                             SizedBox(height: 20),
+
+                            // Content state buttons (e.g., Next button)
                             if (_contentState != ContentState.process)
                               Column(
                                 children: [
@@ -347,7 +372,7 @@ class _PlantScreenState extends State<PlantScreen> {
                                       child: SizedBox(
                                         width:
                                             MediaQuery.of(context).size.width *
-                                                0.85, // 85% of the screen width
+                                                0.85,
                                         child: ElevatedButton(
                                           onPressed: _nextState,
                                           style: ElevatedButton.styleFrom(
@@ -372,8 +397,7 @@ class _PlantScreenState extends State<PlantScreen> {
                                               fontSize: 19,
                                               fontWeight: FontWeight.w500,
                                             ),
-                                            textAlign: TextAlign
-                                                .center, // Center text within button
+                                            textAlign: TextAlign.center,
                                           ),
                                         ),
                                       ),
@@ -382,7 +406,7 @@ class _PlantScreenState extends State<PlantScreen> {
                                   Center(
                                     child: SizedBox(
                                       width: MediaQuery.of(context).size.width *
-                                          0.85, // 85% of the screen width
+                                          0.85,
                                       child: ElevatedButton(
                                         onPressed: _processState,
                                         style: ElevatedButton.styleFrom(
@@ -407,49 +431,43 @@ class _PlantScreenState extends State<PlantScreen> {
                                             fontSize: 19,
                                             fontWeight: FontWeight.w500,
                                           ),
-                                          textAlign: TextAlign
-                                              .center, // Center text within button
+                                          textAlign: TextAlign.center,
                                         ),
                                       ),
                                     ),
                                   ),
                                 ],
                               ),
-                            SizedBox(height: 20),
-                            Positioned(
-                              bottom: 0,
-                              left: 0,
-                              right: 0,
-                              child: Container(
-                                decoration: BoxDecoration(
-                                  color: Colors.white,
-                                  borderRadius: BorderRadius.circular(10),
-                                  boxShadow: [
-                                    BoxShadow(
-                                      color: Colors.black.withOpacity(0.3),
-                                      spreadRadius: 2,
-                                      blurRadius: 3,
-                                      offset: Offset(0, 3),
-                                    ),
-                                  ],
-                                ),
-                                padding: EdgeInsets.all(8),
-                                margin: EdgeInsets.all(8), // Add margin to separate from edges
-                                child: Text(
-                                  widget.isEnglish
-                                    ? 'Note: While GreenGem offers information on the potential health benefits of herbal plants, it is not a substitute for professional medical advice. Please consult healthcare professionals before using herbal remedies, especially if you have existing medical conditions or are taking medications.'
-                                    : 'Tandaan: Habang nag-aalok ang GreenGem ng impormasyon tungkol sa mga potensyal na benepisyo sa kalusugan ng mga halamang halaman, hindi ito kapalit ng propesyonal na payong medikal. Mangyaring kumunsulta sa mga propesyonal sa pangangalagang pangkalusugan bago gumamit ng mga herbal na remedyo, lalo na kung mayroon kang mga kondisyong medikal o umiinom ng mga gamot.',
-                                  style: TextStyle(
-                                    fontSize: 12,
-                                    fontFamily: 'Montserrat',
-                                    color: Colors.black54,
-                                  ),
-                                  textAlign: TextAlign.justify,
-                                ),
-                              ),
-                            ),
                           ],
                         ),
+                      ),
+                    ),
+
+                    // Footer note container
+                    Container(
+                      decoration: BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.circular(10),
+                        boxShadow: [
+                          BoxShadow(
+                            color: Colors.black.withOpacity(0.1),
+                            spreadRadius: 2,
+                            blurRadius: 4,
+                            offset: Offset(0, 3),
+                          ),
+                        ],
+                      ),
+                      padding: EdgeInsets.all(12),
+                      child: Text(
+                        widget.isEnglish
+                            ? 'Note: While GreenGem offers information on the potential health benefits of herbal plants, it is not a substitute for professional medical advice. Please consult healthcare professionals before using herbal remedies, especially if you have existing medical conditions or are taking medications.'
+                            : 'Tandaan: Habang nag-aalok ang GreenGem ng impormasyon tungkol sa mga potensyal na benepisyo sa kalusugan ng mga halamang halaman, hindi ito kapalit ng propesyonal na payong medikal. Mangyaring kumunsulta sa mga propesyonal sa pangangalagang pangkalusugan bago gumamit ng mga herbal na remedyo, lalo na kung mayroon kang mga kondisyong medikal o umiinom ng mga gamot.',
+                        style: TextStyle(
+                          fontSize: 14,
+                          fontFamily: 'Karla',
+                          color: Colors.black87,
+                        ),
+                        textAlign: TextAlign.justify,
                       ),
                     ),
                   ],
