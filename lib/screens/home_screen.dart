@@ -94,23 +94,27 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     final languageManager = Provider.of<LanguageManager>(context);
+    final screenHeight = MediaQuery.of(context).size.height;
+    final screenWidth = MediaQuery.of(context).size.width;
+
     return Scaffold(
-      backgroundColor: Color.fromARGB(255, 0, 0, 0),
+      backgroundColor: Colors.black,
       body: Stack(
         children: [
           Column(
             children: [
               Container(
-                height: MediaQuery.of(context).size.height * 0.41,
+                height: screenHeight * 0.4,
                 color: Colors.black,
               ),
-              Container(
-                height: MediaQuery.of(context).size.height * 0.59,
-                decoration: BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: BorderRadius.only(
-                    topLeft: Radius.circular(17),
-                    topRight: Radius.circular(17),
+              Expanded(
+                child: Container(
+                  decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.only(
+                      topLeft: Radius.circular(17),
+                      topRight: Radius.circular(17),
+                    ),
                   ),
                 ),
               ),
@@ -121,41 +125,38 @@ class _HomeScreenState extends State<HomeScreen> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Padding(
-                  padding: EdgeInsets.only(
-                    top: MediaQuery.of(context).padding.top + 16.0,
-                  ),
-                  child: Text.rich(
-                    TextSpan(
-                      children: [
-                        TextSpan(
-                          text: '${languageManager.welcomeText}\n',
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontWeight: FontWeight.w700,
-                            fontSize: MediaQuery.of(context).size.width * 0.04,
-                            fontFamily: 'Montserrat',
-                          ),
+                SizedBox(
+                  height: MediaQuery.of(context).padding.top + 16.0,
+                ),
+                RichText(
+                  text: TextSpan(
+                    children: [
+                      TextSpan(
+                        text: '${languageManager.welcomeText}\n',
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontWeight: FontWeight.w700,
+                          fontSize: screenWidth * 0.04,
+                          fontFamily: 'Montserrat',
                         ),
-                        WidgetSpan(
-                          child: ShaderMask(
-                            shaderCallback: (bounds) => LinearGradient(
-                              colors: [Color(0xff205901), Color(0xff7bac31)],
-                            ).createShader(bounds),
-                            child: Text(
-                              'GreenGem',
-                              style: TextStyle(
-                                color: Colors.white,
-                                fontWeight: FontWeight.bold,
-                                fontSize:
-                                    MediaQuery.of(context).size.width * 0.10,
-                                fontFamily: 'Montserrat',
-                              ),
+                      ),
+                      WidgetSpan(
+                        child: ShaderMask(
+                          shaderCallback: (bounds) => LinearGradient(
+                            colors: [Color(0xff205901), Color(0xff7bac31)],
+                          ).createShader(bounds),
+                          child: Text(
+                            'GreenGem',
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontWeight: FontWeight.bold,
+                              fontSize: screenWidth * 0.1,
+                              fontFamily: 'Montserrat',
                             ),
                           ),
                         ),
-                      ],
-                    ),
+                      ),
+                    ],
                   ),
                 ),
                 SizedBox(height: 20),
@@ -191,33 +192,20 @@ class _HomeScreenState extends State<HomeScreen> {
                     ),
                     SizedBox(width: 10),
                     Container(
+                      height: screenWidth * 0.15,
+                      width: screenWidth * 0.15,
                       decoration: BoxDecoration(
-                        shape: BoxShape.circle,
-                        boxShadow: [
-                          BoxShadow(
-                            color: Colors.black.withOpacity(0.2),
-                            spreadRadius: 2,
-                            blurRadius: 4,
-                            offset: Offset(0, 2),
-                          ),
-                        ],
-                      ),
-                      child: Container(
-                        height: 57,
-                        width: 57,
-                        decoration: BoxDecoration(
-                          gradient: LinearGradient(
-                            colors: [Color(0xff205901), Color(0xff7bac31)],
-                          ),
-                          borderRadius: BorderRadius.circular(10),
+                        gradient: LinearGradient(
+                          colors: [Color(0xff205901), Color(0xff7bac31)],
                         ),
-                        child: IconButton(
-                          onPressed: navigateToSettings,
-                          icon: SvgPicture.asset(
-                            'assets/icons/settings-adjust-svgrepo-com.svg',
-                            width: 35,
-                            height: 35,
-                          ),
+                        borderRadius: BorderRadius.circular(10),
+                      ),
+                      child: IconButton(
+                        onPressed: navigateToSettings,
+                        icon: SvgPicture.asset(
+                          'assets/icons/settings-adjust-svgrepo-com.svg',
+                          width: screenWidth * 0.07,
+                          height: screenWidth * 0.07,
                         ),
                       ),
                     ),
@@ -226,7 +214,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 SizedBox(height: 20),
                 Container(
                   width: double.infinity,
-                  height: 150,
+                  height: screenHeight * 0.2,
                   decoration: BoxDecoration(
                     gradient: LinearGradient(
                       colors: [Color(0xff205901), Color(0xff7bac31)],
@@ -245,72 +233,47 @@ class _HomeScreenState extends State<HomeScreen> {
                     child: IconButton(
                       icon: SvgPicture.asset(
                         'assets/icons/scan-svgrepo-com.svg',
-                        width: 100,
-                        height: 100,
+                        width: screenWidth * 0.25,
+                        height: screenWidth * 0.25,
                       ),
                       onPressed: navigateToPlantScanner,
                     ),
                   ),
                 ),
-                SizedBox(height: 20),
-                Container(
-                  height: 50,
-                  decoration: BoxDecoration(),
+                SizedBox(height: 15),
+                SizedBox(
+                  height: screenHeight * 0.06,
                   child: ListView(
                     scrollDirection: Axis.horizontal,
                     children: [
-                      Container(
-                        margin: EdgeInsets.symmetric(horizontal: 4),
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(8),
-                        ),
-                        child: CategoryButton(
-                          label: languageManager.allPlants,
-                          isSelected: selectedCategory == 'All plants' ||
-                              selectedCategory == 'Lahat ng halaman',
-                          onTap: filterPlants,
-                        ),
+                      CategoryButton(
+                        label: languageManager.allPlants,
+                        isSelected: selectedCategory == 'All plants' ||
+                            selectedCategory == 'Lahat ng halaman',
+                        onTap: filterPlants,
                       ),
-                      Container(
-                        margin: EdgeInsets.symmetric(horizontal: 4),
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(8),
-                        ),
-                        child: CategoryButton(
-                          label: languageManager.culinaryHerbs,
-                          isSelected: selectedCategory == 'Culinary Herbs' ||
-                              selectedCategory == 'Mga Pangluto na Halaman',
-                          onTap: filterPlants,
-                        ),
+                      CategoryButton(
+                        label: languageManager.culinaryHerbs,
+                        isSelected: selectedCategory == 'Culinary Herbs' ||
+                            selectedCategory == 'Mga Pangluto na Halaman',
+                        onTap: filterPlants,
                       ),
-                      Container(
-                        margin: EdgeInsets.symmetric(horizontal: 4),
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(8),
-                        ),
-                        child: CategoryButton(
-                          label: languageManager.herbalTeas,
-                          isSelected: selectedCategory == 'Herbal Teas' ||
-                              selectedCategory == 'Mga Tsaa ng Halamang-gamot',
-                          onTap: filterPlants,
-                        ),
+                      CategoryButton(
+                        label: languageManager.herbalTeas,
+                        isSelected: selectedCategory == 'Herbal Teas' ||
+                            selectedCategory == 'Mga Tsaa ng Halamang-gamot',
+                        onTap: filterPlants,
                       ),
-                      Container(
-                        margin: EdgeInsets.symmetric(horizontal: 4),
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(8),
-                        ),
-                        child: CategoryButton(
-                          label: languageManager.aromaticOils,
-                          isSelected: selectedCategory == 'Aromatic Oils' ||
-                              selectedCategory == 'Mga Aromatic na Langis',
-                          onTap: filterPlants,
-                        ),
+                      CategoryButton(
+                        label: languageManager.aromaticOils,
+                        isSelected: selectedCategory == 'Aromatic Oils' ||
+                            selectedCategory == 'Mga Aromatic na Langis',
+                        onTap: filterPlants,
                       ),
                     ],
                   ),
                 ),
-                SizedBox(height: 20),
+                SizedBox(height: 5),
                 Expanded(
                   child: OrientationBuilder(
                     builder: (context, orientation) {
@@ -329,23 +292,20 @@ class _HomeScreenState extends State<HomeScreen> {
               ],
             ),
           ),
-          // Positioned Dropdown (search results)
           if (searchResults.isNotEmpty)
             Positioned(
-              top: MediaQuery.of(context).padding.top +
-                  kToolbarHeight +
-                  150, // Adjusted to place below search bar
+              top: MediaQuery.of(context).padding.top + 200,
               left: 16,
               right: 16,
               child: Material(
                 elevation: 5,
                 borderRadius: BorderRadius.circular(10),
                 child: Container(
+                  height: screenHeight * 0.3,
                   decoration: BoxDecoration(
                     color: Colors.white,
                     borderRadius: BorderRadius.circular(10),
                   ),
-                  height: 250, // Fixed height for scrollable content
                   child: ListView.builder(
                     padding: EdgeInsets.zero,
                     itemCount: searchResults.length,
@@ -372,38 +332,32 @@ class CategoryButton extends StatelessWidget {
   final bool isSelected;
   final Function(String) onTap;
 
-  CategoryButton(
-      {required this.label, required this.isSelected, required this.onTap});
+  const CategoryButton({
+    required this.label,
+    required this.isSelected,
+    required this.onTap,
+  });
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: () => onTap(label),
-      child: Container(
-        height: 50,
-        padding: EdgeInsets.symmetric(horizontal: 16),
-        decoration: BoxDecoration(
-          color: isSelected
-              ? Color(0xff7bac31)
-              : Color.fromARGB(255, 224, 224, 224),
-          borderRadius: BorderRadius.circular(8),
-          boxShadow: [
-            BoxShadow(
-              color: Colors.black.withOpacity(0.1),
-              spreadRadius: 2,
-              blurRadius: 4,
-              offset: Offset(0, 2),
-            ),
-          ],
-        ),
-        child: Center(
-          child: Text(
-            label,
-            style: TextStyle(
-              color: isSelected ? Colors.white : Colors.black,
-              fontWeight: FontWeight.bold,
-            ),
+    final screenWidth = MediaQuery.of(context).size.width;
+
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 4.0),
+      child: ElevatedButton(
+        style: ElevatedButton.styleFrom(
+          foregroundColor: isSelected ? Colors.white : Colors.black,
+          backgroundColor: isSelected
+              ? Colors.green
+              : const Color.fromARGB(255, 224, 224, 224),
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(20),
           ),
+        ),
+        onPressed: () => onTap(label),
+        child: Text(
+          label,
+          style: TextStyle(fontSize: screenWidth * 0.035),
         ),
       ),
     );
@@ -421,6 +375,7 @@ class PlantCard extends StatelessWidget {
   Widget build(BuildContext context) {
     final languageManager = Provider.of<LanguageManager>(context);
     bool isEnglish = languageManager.isEnglish;
+    double screenWidth = MediaQuery.of(context).size.width;
 
     return GestureDetector(
       onTap: () {
@@ -448,18 +403,23 @@ class PlantCard extends StatelessWidget {
                 tag: plant.image_path,
                 child: ClipRRect(
                   borderRadius: BorderRadius.vertical(top: Radius.circular(15)),
-                  child: Image.asset(plant.image_path, fit: BoxFit.cover),
+                  child: Image.asset(
+                    plant.image_path,
+                    fit: BoxFit.fitHeight,
+                    width: double.infinity, // Full width for responsiveness
+                    height: screenWidth * 0.3, // Adjust height proportionally
+                  ),
                 ),
               ),
             ),
             Padding(
-              padding: const EdgeInsets.all(8.0),
+              padding: EdgeInsets.all(screenWidth * 0.02), // Dynamic padding
               child: Center(
                 child: Text(
                   isEnglish ? plant.eng_name : plant.tag_name,
                   textAlign: TextAlign.center,
                   style: TextStyle(
-                    fontSize: 13,
+                    fontSize: screenWidth * 0.035, // Responsive font size
                     fontWeight: FontWeight.bold,
                     fontFamily: 'Montserrat',
                   ),

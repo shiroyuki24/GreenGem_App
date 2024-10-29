@@ -278,26 +278,22 @@ class _PlantScreenState extends State<PlantScreen> {
                                   ),
                                 ],
                               ),
+                            SizedBox(height: 20),
 
                             // Process content
                             if (_contentState == ContentState.process)
                               Column(
                                 children: [
                                   // Display the process text
-                                  Padding(
-                                    padding: const EdgeInsets.symmetric(
-                                        horizontal: 16.0),
-                                    child: Text(
-                                      getTextContent(),
-                                      style: TextStyle(
-                                        fontFamily: 'Karla',
-                                        fontSize: 16,
-                                        fontWeight: FontWeight.w400,
-                                      ),
-                                      textAlign: TextAlign.justify,
+                                  Text(
+                                    getTextContent(),
+                                    style: TextStyle(
+                                      fontFamily: 'Karla',
+                                      fontSize: 19,
+                                      fontWeight: FontWeight.w400,
                                     ),
+                                    textAlign: TextAlign.justify,
                                   ),
-
                                   SizedBox(
                                       height:
                                           20), // Add space between text and button
@@ -438,36 +434,44 @@ class _PlantScreenState extends State<PlantScreen> {
                                   ),
                                 ],
                               ),
+
+                            SizedBox(height: 20),
+
+                            // Footer note
+                            Container(
+                              padding: EdgeInsets.all(12),
+                              margin: EdgeInsets.symmetric(
+                                  vertical: 10, horizontal: 5),
+                              decoration: BoxDecoration(
+                                color: Colors.white,
+                                borderRadius: BorderRadius.circular(10),
+                                boxShadow: [
+                                  BoxShadow(
+                                    color: Colors.black.withOpacity(0.3),
+                                    spreadRadius: 2,
+                                    blurRadius: 5,
+                                    offset: Offset(0, 3),
+                                  ),
+                                ],
+                              ),
+                              child: Center(
+                                child: Text(
+                                  widget.isEnglish
+                                      ? 'Note: While GreenGem offers information on the potential health benefits of herbal plants, it is not a substitute for professional medical advice. Please consult healthcare professionals before using herbal remedies, especially if you have existing medical conditions or are taking medications.'
+                                      : 'Tandaan: Habang nag-aalok ang GreenGem ng impormasyon tungkol sa mga potensyal na benepisyo sa kalusugan ng mga halamang halaman, hindi ito kapalit ng propesyonal na payong medikal. Mangyaring kumunsulta sa mga propesyonal sa pangangalagang pangkalusugan bago gumamit ng mga herbal na remedyo, lalo na kung mayroon kang mga kondisyong medikal o umiinom ng mga gamot.',
+                                  style: TextStyle(
+                                    fontFamily: 'Karla',
+                                    fontSize: 14,
+                                    fontWeight: FontWeight.w300,
+                                    fontStyle: FontStyle.italic,
+                                    color: Colors.black54,
+                                  ),
+                                  textAlign: TextAlign.justify,
+                                ),
+                              ),
+                            ),
                           ],
                         ),
-                      ),
-                    ),
-
-                    // Footer note container
-                    Container(
-                      decoration: BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.circular(10),
-                        boxShadow: [
-                          BoxShadow(
-                            color: Colors.black.withOpacity(0.1),
-                            spreadRadius: 2,
-                            blurRadius: 4,
-                            offset: Offset(0, 3),
-                          ),
-                        ],
-                      ),
-                      padding: EdgeInsets.all(12),
-                      child: Text(
-                        widget.isEnglish
-                            ? 'Note: While GreenGem offers information on the potential health benefits of herbal plants, it is not a substitute for professional medical advice. Please consult healthcare professionals before using herbal remedies, especially if you have existing medical conditions or are taking medications.'
-                            : 'Tandaan: Habang nag-aalok ang GreenGem ng impormasyon tungkol sa mga potensyal na benepisyo sa kalusugan ng mga halamang halaman, hindi ito kapalit ng propesyonal na payong medikal. Mangyaring kumunsulta sa mga propesyonal sa pangangalagang pangkalusugan bago gumamit ng mga herbal na remedyo, lalo na kung mayroon kang mga kondisyong medikal o umiinom ng mga gamot.',
-                        style: TextStyle(
-                          fontSize: 14,
-                          fontFamily: 'Karla',
-                          color: Colors.black87,
-                        ),
-                        textAlign: TextAlign.justify,
                       ),
                     ),
                   ],

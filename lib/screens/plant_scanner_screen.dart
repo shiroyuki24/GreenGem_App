@@ -30,7 +30,7 @@ class _PlantScannerState extends State<PlantScanner> {
     });
   }
 
-  loadModel() async {
+  Future<void> loadModel() async {
     try {
       await Tflite.loadModel(
         model: 'assets/model/model.tflite',
@@ -44,7 +44,7 @@ class _PlantScannerState extends State<PlantScanner> {
     }
   }
 
-  classifyImage(File image) async {
+  Future<void> classifyImage(File image) async {
     if (_isModelRunning) return;
 
     setState(() {
@@ -54,7 +54,7 @@ class _PlantScannerState extends State<PlantScanner> {
 
     try {
       // Show the scanning animation
-      await Future.delayed(Duration(seconds: 1));
+      await Future.delayed(const Duration(seconds: 1));
 
       var output = await Tflite.runModelOnImage(
         path: image.path,
@@ -120,7 +120,6 @@ class _PlantScannerState extends State<PlantScanner> {
                     ),
                   );
                 } else {
-                  // If the plant is not found, close the dialog
                   Navigator.of(context).pop();
                 }
               },
@@ -178,25 +177,25 @@ class _PlantScannerState extends State<PlantScanner> {
     super.dispose();
   }
 
-  pickImage() async {
+  Future<void> pickImage() async {
     var image = await picker.pickImage(source: ImageSource.camera);
     if (image == null) return;
 
     setState(() {
       _image = File(image.path);
-      _loading = true; // Start the loading animation after image is picked
+      _loading = true;
     });
 
     classifyImage(_image!);
   }
 
-  pickGalleryImage() async {
+  Future<void> pickGalleryImage() async {
     var image = await picker.pickImage(source: ImageSource.gallery);
     if (image == null) return;
 
     setState(() {
       _image = File(image.path);
-      _loading = true; // Start the loading animation after image is picked
+      _loading = true;
     });
 
     classifyImage(_image!);
@@ -204,6 +203,9 @@ class _PlantScannerState extends State<PlantScanner> {
 
   @override
   Widget build(BuildContext context) {
+    final screenHeight = MediaQuery.of(context).size.height;
+    final screenWidth = MediaQuery.of(context).size.width;
+
     return Scaffold(
       backgroundColor: Colors.black,
       body: Stack(
@@ -211,14 +213,14 @@ class _PlantScannerState extends State<PlantScanner> {
           Column(
             children: [
               Container(
-                height: MediaQuery.of(context).size.height * 0.13,
+                height: screenHeight * 0.10,
                 color: Colors.black,
               ),
               Container(
-                height: MediaQuery.of(context).size.height * 0.87,
+                height: screenHeight * 0.90,
                 decoration: BoxDecoration(
                   color: Colors.white,
-                  borderRadius: BorderRadius.only(
+                  borderRadius: const BorderRadius.only(
                     topLeft: Radius.circular(17),
                     topRight: Radius.circular(17),
                   ),
@@ -239,7 +241,8 @@ class _PlantScannerState extends State<PlantScanner> {
                       Align(
                         alignment: Alignment.centerLeft,
                         child: IconButton(
-                          icon: Icon(Icons.arrow_back, color: Colors.white),
+                          icon:
+                              const Icon(Icons.arrow_back, color: Colors.white),
                           onPressed: () {
                             Navigator.pop(context);
                           },
@@ -251,7 +254,7 @@ class _PlantScannerState extends State<PlantScanner> {
                               ? 'Plant Scanner'
                               : 'Tagasuri ng Halaman',
                           style: TextStyle(
-                            fontSize: MediaQuery.of(context).size.width * 0.06,
+                            fontSize: screenWidth * 0.06,
                             fontWeight: FontWeight.bold,
                             color: Colors.white,
                             fontFamily: 'Montserrat',
@@ -261,153 +264,150 @@ class _PlantScannerState extends State<PlantScanner> {
                     ],
                   ),
                 ),
-                SizedBox(height: 40),
+                SizedBox(height: screenHeight * 0.04),
                 Center(
                   child: !_loading && _image == null
                       ? Image.asset(
                           'assets/images/logo.png',
-                          width: MediaQuery.of(context).size.width * 0.6,
+                          width: screenWidth * 0.6,
                         )
                       : _loading
                           ? Column(
                               children: [
-                                CircularProgressIndicator(),
-                                SizedBox(height: 20),
+                                const CircularProgressIndicator(),
+                                SizedBox(height: screenHeight * 0.02),
                                 Text(
                                   widget.isEnglish
                                       ? 'Scanning...'
                                       : 'Nagsusuri...',
                                   style: TextStyle(
-                                    fontSize: 18,
+                                    fontSize: screenWidth * 0.045,
                                     fontWeight: FontWeight.bold,
                                     color: Colors.green[800],
                                   ),
                                 ),
                               ],
                             )
-                          : Container(
-                              child: Column(
-                                children: [
-                                  Container(
-                                    height: 250,
-                                    child: _image != null
-                                        ? Image.file(_image!)
-                                        : Container(),
-                                  ),
-                                  SizedBox(height: 20),
-                                  _output != null && _output!.isNotEmpty
-                                      ? Column(
-                                          children: _output!.map((result) {
-                                            return Text(
-                                              '${result['label']} - Confidence: ${result['confidence'].toStringAsFixed(2)}',
-                                              style: TextStyle(
-                                                  color: Colors.green[800],
-                                                  fontSize: 20),
-                                            );
-                                          }).toList(),
-                                        )
+                          : Column(
+                              children: [
+                                Container(
+                                  height: screenHeight * 0.3,
+                                  child: _image != null
+                                      ? Image.file(_image!)
                                       : Container(),
-                                ],
-                              ),
-                            ),
-                ),
-                SizedBox(height: 20),
-                Container(
-                  width: MediaQuery.of(context).size.width,
-                  child: Column(
-                    children: [
-                      GestureDetector(
-                        onTap: pickImage,
-                        child: Container(
-                          width: MediaQuery.of(context).size.width - 150,
-                          alignment: Alignment.center,
-                          padding: EdgeInsets.symmetric(
-                              horizontal: 24, vertical: 17),
-                          decoration: BoxDecoration(
-                            gradient: LinearGradient(
-                              colors: [
-                                Color(0xff205901),
-                                Color(0xff7bac31),
+                                ),
+                                SizedBox(height: screenHeight * 0.02),
+                                _output != null && _output!.isNotEmpty
+                                    ? Column(
+                                        children: _output!.map((result) {
+                                          return Text(
+                                            '${result['label']} - Confidence: ${result['confidence'].toStringAsFixed(2)}',
+                                            style: TextStyle(
+                                                color: Colors.green[800],
+                                                fontSize: screenWidth * 0.05),
+                                          );
+                                        }).toList(),
+                                      )
+                                    : Container(),
                               ],
                             ),
-                            borderRadius: BorderRadius.circular(17),
-                          ),
-                          child: Text(
-                            widget.isEnglish
-                                ? 'Take a Photo'
-                                : 'Kumuha ng Larawan',
-                            style: TextStyle(
-                                color: Colors.white,
-                                fontSize: 16,
-                                fontFamily: 'Karla'),
-                          ),
-                        ),
-                      ),
-                      SizedBox(height: 5),
-                      GestureDetector(
-                        onTap: pickGalleryImage,
-                        child: Container(
-                          width: MediaQuery.of(context).size.width - 150,
-                          alignment: Alignment.center,
-                          padding: EdgeInsets.symmetric(
-                              horizontal: 24, vertical: 17),
-                          decoration: BoxDecoration(
-                            gradient: LinearGradient(
-                              colors: [
-                                Color(0xff205901),
-                                Color(0xff7bac31),
-                              ],
-                            ),
-                            borderRadius: BorderRadius.circular(17),
-                          ),
-                          child: Text(
-                            widget.isEnglish
-                                ? 'Pick from Gallery'
-                                : 'Pumili mula sa Gallery',
-                            style: TextStyle(
-                                color: Colors.white,
-                                fontSize: 16,
-                                fontFamily: 'Karla'),
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
                 ),
-                SizedBox(height: 20),
+                SizedBox(height: screenHeight * 0.02),
+                Column(
+                  children: [
+                    GestureDetector(
+                      onTap: pickImage,
+                      child: Container(
+                        width: screenWidth - 150,
+                        alignment: Alignment.center,
+                        padding:
+                            EdgeInsets.symmetric(horizontal: 24, vertical: 17),
+                        decoration: BoxDecoration(
+                          gradient: const LinearGradient(
+                            colors: [
+                              Color(0xff205901),
+                              Color(0xff7bac31),
+                            ],
+                          ),
+                          borderRadius: BorderRadius.circular(17),
+                        ),
+                        child: Text(
+                          widget.isEnglish
+                              ? 'Take a Photo'
+                              : 'Kumuha ng Larawan',
+                          style: TextStyle(
+                              color: Colors.white,
+                              fontSize: screenWidth * 0.045,
+                              fontFamily: 'Karla'),
+                        ),
+                      ),
+                    ),
+                    const SizedBox(height: 15),
+                    GestureDetector(
+                      onTap: pickGalleryImage,
+                      child: Container(
+                        width: screenWidth - 150,
+                        alignment: Alignment.center,
+                        padding:
+                            EdgeInsets.symmetric(horizontal: 24, vertical: 17),
+                        decoration: BoxDecoration(
+                          gradient: const LinearGradient(
+                            colors: [
+                              Color(0xff205901),
+                              Color(0xff7bac31),
+                            ],
+                          ),
+                          borderRadius: BorderRadius.circular(17),
+                        ),
+                        child: Text(
+                          widget.isEnglish
+                              ? 'Choose from Gallery'
+                              : 'Pumili mula sa Gallery',
+                          style: TextStyle(
+                              color: Colors.white,
+                              fontSize: screenWidth * 0.045,
+                              fontFamily: 'Karla'),
+                        ),
+                      ),
+                    ),
+                    SizedBox(height: 20),
+                    Positioned(
+                      bottom: 0,
+                      left: 0,
+                      right: 0,
+                      child: Container(
+                        decoration: BoxDecoration(
+                          color: Color(0xFFF5EFE6),
+                          borderRadius: BorderRadius.circular(10),
+                          boxShadow: [
+                            BoxShadow(
+                              color: Colors.black.withOpacity(0.3),
+                              spreadRadius: 2,
+                              blurRadius: 5,
+                              offset: Offset(0, 3),
+                            ),
+                          ],
+                        ),
+                        padding: EdgeInsets.all(16),
+                        margin: EdgeInsets.all(16),
+                        child: Text(
+                          widget.isEnglish
+                              ? 'Note: The plant scanner is a helpful tool, but it\'s important to remember that it\'s not always 100% accurate. To achieve the best results, ensure that the plant is well-lit and the background is simple and contrasting to make the plant stand out. Keep the camera steady and focused on the plant, capturing clear views of its key features. If the first scan isn\'t accurate, try scanning the plant again from a different angle or with improved lighting. Always cross-check the results with reliable sources to confirm the plant\'s identification.'
+                              : 'Tandaan: Habang nag-aalok ang GreenGem ng impormasyon tungkol sa mga potensyal na benepisyo sa kalusugan ng mga halamang halaman, hindi ito kapalit ng propesyonal na payong medikal. Mangyaring kumunsulta sa mga propesyonal sa pangangalagang pangkalusugan bago gumamit ng mga herbal na remedyo, lalo na kung mayroon kang mga kondisyong medikal o umiinom ng mga gamot.',
+                          style: TextStyle(
+                            fontSize: 12,
+                            fontFamily: 'Karla',
+                            fontWeight: FontWeight.w300,
+                            fontStyle: FontStyle.italic,
+                            color: Colors.black54,
+                          ),
+                          textAlign: TextAlign.justify,
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
               ],
-            ),
-          ),
-          Positioned(
-            bottom: 0,
-            left: 0,
-            right: 0,
-            child: Container(
-              decoration: BoxDecoration(
-                color: Color(0xFFF5EFE6),
-                borderRadius: BorderRadius.circular(10),
-                boxShadow: [
-                  BoxShadow(
-                    color: Colors.black.withOpacity(0.3),
-                    spreadRadius: 2,
-                    blurRadius: 5,
-                    offset: Offset(0, 3),
-                  ),
-                ],
-              ),
-              padding: EdgeInsets.all(16),
-              margin: EdgeInsets.all(16), // Add margin to separate from edges
-              child: Text(
-                widget.isEnglish
-                    ? 'Note: The plant scanner is a helpful tool, but it\'s important to remember that it\'s not always 100% accurate. To achieve the best results, ensure that the plant is well-lit and the background is simple and contrasting to make the plant stand out. Keep the camera steady and focused on the plant, capturing clear views of its key features. If the first scan isn\'t accurate, try scanning the plant again from a different angle or with improved lighting. Always cross-check the results with reliable sources to confirm the plant\'s identification.'
-                    : 'Tandaan: Habang nag-aalok ang GreenGem ng impormasyon tungkol sa mga potensyal na benepisyo sa kalusugan ng mga halamang halaman, hindi ito kapalit ng propesyonal na payong medikal. Mangyaring kumunsulta sa mga propesyonal sa pangangalagang pangkalusugan bago gumamit ng mga herbal na remedyo, lalo na kung mayroon kang mga kondisyong medikal o umiinom ng mga gamot.',
-                style: TextStyle(
-                  fontSize: 12,
-                  fontFamily: 'Montserrat',
-                  color: Colors.black54,
-                ),
-                textAlign: TextAlign.justify,
-              ),
             ),
           ),
         ],

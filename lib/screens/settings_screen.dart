@@ -6,6 +6,9 @@ class SettingsScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final languageManager = Provider.of<LanguageManager>(context);
+    final screenHeight = MediaQuery.of(context).size.height;
+    final screenWidth = MediaQuery.of(context).size.width;
+
     return Scaffold(
       backgroundColor: Colors.black,
       body: Stack(
@@ -13,11 +16,11 @@ class SettingsScreen extends StatelessWidget {
           Column(
             children: [
               Container(
-                height: MediaQuery.of(context).size.height * 0.13,
+                height: screenHeight * 0.10,
                 color: Colors.black,
               ),
               Container(
-                height: MediaQuery.of(context).size.height * 0.87,
+                height: screenHeight * 0.90,
                 decoration: BoxDecoration(
                   color: Colors.white,
                   borderRadius: BorderRadius.only(
@@ -29,17 +32,22 @@ class SettingsScreen extends StatelessWidget {
             ],
           ),
           Padding(
-            padding: const EdgeInsets.all(16.0),
+            padding: EdgeInsets.symmetric(
+              horizontal: screenWidth * 0.03,
+              vertical: screenHeight * 0.01,
+            ),
             child: Column(
               children: [
                 Padding(
                   padding: EdgeInsets.only(
-                    top: MediaQuery.of(context).padding.top + 16.0,
+                    top: MediaQuery.of(context).padding.top +
+                        screenHeight * 0.02,
                   ),
                   child: Row(
                     children: [
                       IconButton(
                         icon: Icon(Icons.arrow_back, color: Colors.white),
+                        iconSize: screenWidth * 0.07,
                         onPressed: () {
                           Navigator.pop(context);
                         },
@@ -52,26 +60,29 @@ class SettingsScreen extends StatelessWidget {
                                 : 'Mga Setting',
                             style: TextStyle(
                               color: Colors.white,
-                              fontSize:
-                                  MediaQuery.of(context).size.width * 0.06,
+                              fontSize: screenWidth * 0.06,
                               fontWeight: FontWeight.bold,
                               fontFamily: 'Montserrat',
                             ),
                           ),
                         ),
                       ),
-                      SizedBox(width: 48),
+                      SizedBox(width: screenWidth * 0.12), // Adjusted spacing
                     ],
                   ),
                 ),
-                SizedBox(height: 20),
+                SizedBox(height: screenHeight * 0.02),
                 Expanded(
                   child: ListView(
+                    padding:
+                        EdgeInsets.symmetric(vertical: screenHeight * 0.02),
                     children: [
-                      _buildSettingsButton(context,
-                          languageManager.isEnglish ? 'Language' : 'Wika', () {
-                        _showLanguageDialog(context, languageManager.isEnglish);
-                      }),
+                      _buildSettingsButton(
+                        context,
+                        languageManager.isEnglish ? 'Language' : 'Wika',
+                        () => _showLanguageDialog(
+                            context, languageManager.isEnglish),
+                      ),
                       _buildSettingsButton(
                         context,
                         languageManager.isEnglish
@@ -123,10 +134,13 @@ class SettingsScreen extends StatelessWidget {
     );
   }
 
-  Widget _buildSettingsButton(BuildContext context, String label,
-      [VoidCallback? onTap]) {
+  Widget _buildSettingsButton(
+      BuildContext context, String label, VoidCallback? onTap) {
+    final screenWidth = MediaQuery.of(context).size.width;
+    final screenHeight = MediaQuery.of(context).size.height;
+
     return Container(
-      margin: EdgeInsets.symmetric(vertical: 10),
+      margin: EdgeInsets.symmetric(vertical: screenHeight * 0.015),
       decoration: BoxDecoration(
         gradient: LinearGradient(
           colors: [Color(0xff205901), Color(0xff7bac31)],
@@ -144,14 +158,14 @@ class SettingsScreen extends StatelessWidget {
       child: ListTile(
         title: Center(
           child: Padding(
-            padding: const EdgeInsets.symmetric(vertical: 12.0),
+            padding: EdgeInsets.symmetric(vertical: screenHeight * 0.015),
             child: Text(
               label,
               style: TextStyle(
-                fontSize: 18,
-                fontWeight: FontWeight.bold,
+                fontSize: screenWidth * 0.045,
+                fontWeight: FontWeight.normal,
                 color: Colors.white,
-                fontFamily: 'Montserrat',
+                fontFamily: 'Karla',
               ),
             ),
           ),
