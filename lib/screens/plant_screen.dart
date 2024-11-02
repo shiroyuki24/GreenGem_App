@@ -207,8 +207,8 @@ class _PlantScreenState extends State<PlantScreen> {
                                   SizedBox(height: 15),
                                   Text(
                                     widget.isEnglish
-                                        ? 'Tagalog name: ${widget.plant.tag_name}'
-                                        : 'English name: ${widget.plant.eng_name}',
+                                        ? 'Tagalog Name: ${widget.plant.tag_name}'
+                                        : 'English Name: ${widget.plant.eng_name}',
                                     style: TextStyle(
                                       fontSize: 19,
                                       fontFamily: 'Karla',
@@ -218,7 +218,7 @@ class _PlantScreenState extends State<PlantScreen> {
                                   ),
                                   SizedBox(height: 10),
                                   Text(
-                                    'Scientific name: ${widget.plant.sci_name}',
+                                    'Scientific Name: ${widget.plant.sci_name}',
                                     style: TextStyle(
                                       fontSize: 19,
                                       fontFamily: 'Karla',
