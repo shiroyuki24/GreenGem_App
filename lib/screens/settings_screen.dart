@@ -194,7 +194,7 @@ class SettingsScreen extends StatelessWidget {
                 padding: EdgeInsets.all(10.0),
                 child: Text(
                   isEnglish ? 'Select Language' : 'Piliin ang Wika',
-                  textAlign: TextAlign.center, // Move this out of TextStyle
+                  textAlign: TextAlign.center,
                   style: TextStyle(
                       fontFamily: 'Montserrat',
                       fontSize: 20,
@@ -252,7 +252,7 @@ class SettingsScreen extends StatelessWidget {
                         backgroundColor: Colors.grey,
                       ),
                     ),
-                    SizedBox(width: 10), // Optional spacing between buttons
+                    SizedBox(width: 10),
                     TextButton(
                       child: Text(
                         isEnglish ? 'Apply' : 'Gamitin',

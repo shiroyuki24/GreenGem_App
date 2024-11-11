@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:gg_app/language_manager.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'home_screen.dart';
+import 'dart:io';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
@@ -49,7 +51,7 @@ class _SplashScreenState extends State<SplashScreen> {
     setState(() {
       _termsAccepted = true;
     });
-    Navigator.of(context).pop();
+    SystemNavigator.pop();
   }
 
   void _navigateToHomePage() {
