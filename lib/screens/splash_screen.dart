@@ -51,7 +51,7 @@ class _SplashScreenState extends State<SplashScreen> {
     setState(() {
       _termsAccepted = true;
     });
-    SystemNavigator.pop();
+    Navigator.of(context).pop();
   }
 
   void _navigateToHomePage() {
@@ -330,6 +330,6 @@ class _TermsDialogState extends State<TermsDialog> {
   }
 
   void _closeApp() {
-    Navigator.of(context).pop();
+    SystemNavigator.pop();
   }
 }
