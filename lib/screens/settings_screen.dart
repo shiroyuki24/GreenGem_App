@@ -93,22 +93,22 @@ class SettingsScreen extends StatelessWidget {
                           context,
                           'Disclaimer',
                           languageManager.isEnglish
-                              ? 'While GreenGem offers information on the potential health benefits of herbal plants, it is not a substitute for professional medical advice. Please consult healthcare professionals before using herbal remedies, especially if you have existing medical conditions or are taking medications.'
-                              : 'Habang nag-aalok ang GreenGem ng impormasyon sa mga potensyal na benepisyo sa kalusugan ng mga halamang herbal, hindi ito kapalit ng propesyonal na payong medikal. Mangyaring kumunsulta sa mga propesyonal sa pangangalagang pangkalusugan bago gumamit ng mga herbal na remedyo, lalo na kung mayroon kang mga kondisyong medikal o umiinom ng mga gamot.',
+                              ? 'The GreenGem Mobile app provides herbal plant information for informational purposes only and is not a substitute for professional medical advice, diagnosis, or treatment. Users are encouraged to consult a healthcare provider before using any herbal remedies, particularly if they have health conditions, allergies, or are taking medications, as herbal treatments may interact with medications.The app does not endorse specific remedies, and the use of its content is at the user\'s own risk. GreenGem disclaims any liability for loss or damage resulting from the use of its information. By using the app, users acknowledge that it is not medical advice and agree to seek professional guidance for any health concerns.	'
+                              : 'Ang GreenGem Mobile app ay nagbibigay ng impormasyon tungkol sa mga halamang gamot para sa layuning pang-impormasyon lamang at hindi kapalit ng propesyonal na payo, diagnosis, o paggamot medikal. Hinihikayat ang mga gumagamit na kumonsulta sa isang healthcare provider bago gumamit ng anumang halamang gamot, lalo na kung may mga kondisyong medikal, allergy, o umiinom ng mga gamot, dahil maaaring magkaruon ng interaksyon ang mga halamang gamot sa mga gamot. Hindi nire-rekomenda ng app ang mga partikular na remedyo, at ang paggamit ng nilalaman nito ay nasa sariling panganib ng gumagamit. Ang GreenGem ay hindi mananagot para sa anumang pagkawala o pinsala na dulot ng paggamit ng mga impormasyon nito. Sa paggamit ng app, kinikilala ng mga gumagamit na hindi ito isang medikal na payo at pumapayag silang kumonsulta sa mga propesyonal para sa anumang alalahanin sa kalusugan.',
                           languageManager.isEnglish,
                         ),
                       ),
                       _buildSettingsButton(
                         context,
-                        languageManager.isEnglish ? 'About' : 'Tungkol sa amin',
+                        languageManager.isEnglish ? 'About' : 'Tungkol sa app',
                         () => _showDialog(
                           context,
                           languageManager.isEnglish
                               ? 'About'
-                              : 'Tungkol sa amin',
+                              : 'Tungkol sa app',
                           languageManager.isEnglish
-                              ? 'GreenGem is the ultimate destination for herbal plant enthusiasts, offering valuable insights into the diverse world of botanical wonders. Our platform provides detailed information on various herbs, empowering users to explore their properties and applications with confidence. Join us on a journey to holistic wellness and reconnect with nature\'s healing power. Contact us for inquiries or feedback.'
-                              : 'Ang GreenGem ay ang pinakahuling destinasyon para sa mga mahilig sa herbal na halaman, na nag-aalok ng mahahalagang insight sa magkakaibang mundo ng botanical wonders. Ang aming platform ay nagbibigay ng detalyadong impormasyon sa iba\'t ibang mga halamang gamot, na nagbibigay ng kapangyarihan sa mga user na galugarin ang kanilang mga ari-arian at mga aplikasyon nang may kumpiyansa. Samahan kami sa isang paglalakbay tungo sa holistic wellness at muling kumonekta sa nakapagpapagaling na kapangyarihan ng kalikasan. Makipag-ugnayan sa amin para sa mga katanungan o feedback.',
+                              ? 'GreenGem is the ultimate destination for herbal plant enthusiasts, offering valuable insights into the diverse world of botanical wonders. Our platform provides detailed information on various herbs, empowering users to explore their properties and applications with confidence.Join us on a journey to holistic wellness and reconnect with nature\'s healing power. Contact us for inquiries or feedback.'
+                              : 'Ang GreenGem ay ang pangunahing destinasyon para sa mga mahilig sa halamang gamot, na nag-aalok ng mahalagang kaalaman tungkol sa iba\'t ibang uri ng mga halaman. Ang aming platform ay nagbibigay ng detalyadong impormasyon tungkol sa iba\'t ibang halamang gamot, na nagbibigay-kakayahan sa mga gumagamit na tuklasin ang kanilang mga katangian at gamit nang may kumpiyansa. Samahan kami sa isang paglalakbay patungo sa holistic na kalusugan at muling makipag-ugnayan sa nakapagpapagaling na lakas ng kalikasan. Makipag-ugnayan sa amin para sa mga katanungan o Feedback.',
                           languageManager.isEnglish,
                         ),
                       ),
@@ -395,36 +395,50 @@ class SettingsScreen extends StatelessWidget {
         ? '''
         Welcome to GreenGem! By accessing and using our app, you agree to the following terms and conditions:
 
-        1. Introduction: Welcome to GreenGem, your ultimate herbal companion app. These terms and conditions govern your use of the GreenGem mobile application. By accessing or using the app, you agree to comply with these terms.
+        1. Introduction
+        By using the GreenGem app, users agree to comply with these terms and conditions.
 
-        2. Content and Information: The content provided in the GreenGem app, including, articles, tutorials, images, and videos, is for informational purposes only.\n\nWe strive to ensure the accuracy and reliability of the information provided in the app. However, we do not guarantee the completeness or correctness of any content.\n\nPlant information and recommendations are based on research and expert knowledge. Users should exercise their judgment and consider local conditions when applying any advice provided in the app.\n\nThe GreenGem app does not constitute medical advice, and we disclaim any liability for any loss or damage arising from the use of the information provided in the app. Users are encouraged to exercise caution and seek professional medical guidance when making decisions about their health and wellness.\n\n'
+        2. Content and Information
+        GreenGem provides various modules for users to explore herbal plant information. The app offers a range of educational tools, including articles, tutorials, and videos. However, the app does not guarantee the accuracy or completeness of the content. It is intended for informational purposes only, and users should seek professional medical advice when necessary.
 
-        3. Usage Restrictions: You agree not to misuse the GreenGem app or use it for any unlawful purpose.\n\nYou may not modify, adapt, sublicense, translate, sell, or exploit any part of the app without our prior written consent.
+        3. Usage Restrictions
+        Users agree not to misuse the app or use it for unlawful purposes. Modification, adaptation, sublicensing, or exploitation of any part of the app without prior written consent is prohibited.
 
-        4. Privacy Policy: The GreenGem App does not collect, store, or use any personal information from its users. As our App does not require user accounts, we do not collect names, addresses, phone numbers, email addresses, or any other personally identifiable information.
+        4. Privacy Policy
+        GreenGem does not collect, store, or use any personal information.
 
-        5. Termination: We reserve the right to suspend or terminate your access to the GreenGem app at any time, without prior notice or liability, for any reason.
+        5. Termination
+        GreenGem reserves the right to suspend or terminate access to the app at any time, without prior notice or liability.
 
-        6. Changes to Terms: We may update or revise these terms and conditions from time to time. The revised version will be effective upon posting on the app. Your continued use of the GreenGem app after any changes constitutes acceptance of those changes.
-
-        7. Contact Us: If you have any questions or concerns about these terms, please contact us at greengemapp@gmail.com.
+        6. Changes to Terms
+        GreenGem may update these terms. Continued use of the app after changes constitutes acceptance of the updated terms.
+        
+        7. Contact Us
+        For questions or concerns, contact GreenGem at greengem.0000@gmail.com
         '''
         : '''
         Maligayang pagdating sa GreenGem! Sa pamamagitan ng pag-access at paggamit sa aming app, sumasang-ayon ka sa mga sumusunod na tuntunin at kundisyon:
 
-        1. Panimula: Maligayang pagdating sa GreenGem, ang iyong pinakamahusay na kasamang herbal na app. Ang mga tuntunin at kundisyon na ito ay namamahala sa iyong paggamit ng GreenGem mobile application. Sa pamamagitan ng pag-access o paggamit sa app, sumasang-ayon kang sumunod sa mga tuntuning ito.
+        1. Panimula
+        Sa paggamit ng GreenGem app, ang mga gumagamit ay sumasang-ayon na sumunod sa mga termino at kundisyon na ito.
 
-        2. Nilalaman at Impormasyon: Ang nilalamang ibinigay sa GreenGem app, kabilang ang, mga artikulo, tutorial, larawan, at video, ay para sa mga layuning pang-impormasyon lamang.\n\nSinisikap naming tiyakin ang katumpakan at pagiging maaasahan ng impormasyong ibinigay sa app. Gayunpaman, hindi namin ginagarantiya ang pagiging kumpleto o kawastuhan ng anumang nilalaman.\n\nAng impormasyon at rekomendasyon ng halaman ay batay sa pananaliksik at kaalaman ng eksperto. Dapat gamitin ng mga user ang kanilang paghuhusga at isaalang-alang ang mga lokal na kundisyon kapag nag-aaplay ng anumang payo na ibinigay sa app.\n\nAng GreenGem app ay hindi bumubuo ng medikal na payo, at itinatanggi namin ang anumang pananagutan para sa anumang pagkawala o pinsalang dulot ng paggamit ng impormasyong ibinigay sa app. Hinihikayat ang mga user na mag-ingat at humingi ng propesyonal na medikal na patnubay kapag gumagawa ng mga desisyon tungkol sa kanilang kalusugan at kagalingan.\n\n'
+        2. Nilalaman at Impormasyon
+        Ang GreenGem ay nag-aalok ng iba't ibang mga module para sa mga gumagamit upang matutunan ang impormasyon tungkol sa mga halamang-gamot. Kasama sa app ang mga tool pang-edukasyon tulad ng mga artikulo, tutorial, at mga video. Gayunpaman, hindi ginagarantiyahan ng app ang katumpakan o kumpletong impormasyon ng nilalaman. Ang mga ito ay layunin lamang para sa impormasyon, at ang mga gumagamit ay dapat maghanap ng propesyonal na medikal na payo kung kinakailangan.
 
-        3. Mga Paghihigpit sa Paggamit: Sumasang-ayon kang huwag gamitin sa maling paraan ang GreenGem app o gamitin ito para sa anumang labag sa batas na layunin.\n\nHindi mo maaaring baguhin, iakma, i-sublicense, isalin, ibenta, o pagsamantalahan ang anumang bahagi ng app nang wala ang aming paunang nakasulat na pahintulot.
+        3. Mga Pagbabawal sa Paggamit
+        ng mga gumagamit ay sumasang-ayon na huwag gawing mali ang paggamit ng app o gamitin ito para sa mga labag sa batas na layunin. Ipinagbabawal ang pagbabago, adaptasyon, sublicensing, o pagpapakinabangan ng anumang bahagi ng app nang walang paunang nakasulat na pahintulot.
 
-        4. Patakaran sa Privacy: Ang GreenGem App ay hindi nangongolekta, nag-iimbak, o gumagamit ng anumang personal na impormasyon mula sa mga gumagamit nito. Dahil hindi nangangailangan ang aming App ng mga user account, hindi kami nangongolekta ng mga pangalan, address, numero ng telepono, email address, o anumang iba pang impormasyong nagbibigay ng personal na pagkakakilanlan.
+        4. Patakaran sa Privacy
+        Ang GreenGem ay hindi nangongolekta, nag-iimbak, o gumagamit ng anumang personal na impormasyon.
 
-        5. Pagwawakas: Inilalaan namin ang karapatang suspindihin o wakasan ang iyong pag-access sa GreenGem app anumang oras, nang walang paunang abiso o pananagutan, para sa anumang kadahilanan.
+        5. Pagwawakas
+        May karapatan ang GreenGem na suspendihin o wakasan ang access sa app anumang oras, nang walang abiso o pananagutan.
 
-        6. Mga Pagbabago sa Mga Tuntunin: Maaari naming i-update o baguhin ang mga tuntunin at kundisyon na ito paminsan-minsan. Magiging epektibo ang binagong bersyon sa pag-post sa app. Ang iyong patuloy na paggamit ng GreenGem app pagkatapos ng anumang mga pagbabago ay bumubuo ng pagtanggap sa mga pagbabagong iyon.
+        6. Mga Pagbabago sa mga Termino
+        Maaaring baguhin ng GreenGem ang mga termino. Ang patuloy na paggamit ng app matapos ang mga pagbabago ay itinuturing na pagtanggap sa mga na-update na termino.
 
-        7. Makipag-ugnayan sa Amin: Kung mayroon kang anumang mga tanong o alalahanin tungkol sa mga tuntuning ito, mangyaring makipag-ugnayan sa amin sa greengemapp@gmail.com.
+        7. Makipag-ugnayan sa Amin
+        Para sa mga katanungan o alalahanin, maaaring makipag-ugnayan sa GreenGem sa greengem.0000@gmail.com
         ''';
   }
 }
