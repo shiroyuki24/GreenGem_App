@@ -1,11 +1,11 @@
-Aloe Vera
+Aloe vera
 Asparagus
 Avocado
 Bashful Mimosa
-Bitter Melon
+Bittter Melon
 Black Plum
 Blue Pea
-Bluea Camphor
+Blumea Camphor
 Bottle Gourd
 Broccoli
 Calamondin
@@ -13,13 +13,13 @@ Cantaloupe
 Carrot
 Chayote
 Coconut
-Corn Mint
+Cornt Mint
 Dandelion
 Dragon Fruit
 False Garlic
 Fan Palm
-Five-Leaf Chaste Tree
-Galip Nut
+Fve-leaf Chaste Tree
+Galip nut
 Garlic
 Ginger
 Goat Weed
@@ -54,7 +54,7 @@ Star Anise
 Taro
 Thorny Amaranth
 Turmeric
-Vertiver Grass
+Vetiver Grass
 Water Lily
 Weeping Fig
 Wild Tea
