@@ -3,6 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:gg_app/models/plants.dart';
 import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 import 'package:connectivity_plus/connectivity_plus.dart';
+import 'package:volume_watcher/volume_watcher.dart';
 
 class VideoPlayerScreen extends StatefulWidget {
   final Plant plant;
@@ -19,12 +20,12 @@ class _VideoPlayerScreenState extends State<VideoPlayerScreen> {
   late YoutubePlayerController _controller;
   bool _isConnected = false;
   double _volume = 100;
-  double _previousVolume = 100;
 
   @override
   void initState() {
     super.initState();
     _checkConnectivity();
+    _initializeVolumeWatcher();
   }
 
   Future<void> _checkConnectivity() async {
@@ -43,6 +44,19 @@ class _VideoPlayerScreenState extends State<VideoPlayerScreen> {
 
         SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersive);
       }
+    });
+  }
+
+  Future<void> _initializeVolumeWatcher() async {
+    // Get the initial volume
+    _volume = await VolumeWatcher.getCurrentVolume;
+
+    VolumeWatcher.addListener((volume) {
+      setState(() {
+        _volume = volume;
+        _controller
+            .setVolume((_volume * 100).round()); // Sync to YouTube volume
+      });
     });
   }
 
@@ -127,14 +141,8 @@ class _VideoPlayerScreenState extends State<VideoPlayerScreen> {
           icon: Icon(_volume == 0 ? Icons.volume_off : Icons.volume_up),
           onPressed: () {
             setState(() {
-              if (_volume == 0) {
-                _volume = _previousVolume;
-                _controller.setVolume(_volume.round());
-              } else {
-                _previousVolume = _volume;
-                _volume = 0;
-                _controller.setVolume(_volume.round());
-              }
+              _volume = _volume == 0 ? 1.0 : 0.0; // Toggle volume
+              _controller.setVolume((_volume * 100).round());
             });
           },
         ),
@@ -142,15 +150,16 @@ class _VideoPlayerScreenState extends State<VideoPlayerScreen> {
           child: Slider(
             value: _volume,
             min: 0,
-            max: 100,
+            max: 1,
             divisions: 100,
-            label: _volume.round().toString(),
+            label: (_volume * 100).round().toString(),
             activeColor: Colors.green,
             inactiveColor: Colors.green.withOpacity(0.5),
             onChanged: (value) {
               setState(() {
                 _volume = value;
-                _controller.setVolume(_volume.round());
+                _controller.setVolume((_volume * 100).round());
+                VolumeWatcher.setVolume(value); // Update system volume
               });
             },
           ),

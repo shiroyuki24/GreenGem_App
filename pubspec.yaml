@@ -21,6 +21,7 @@ dependencies:
   connectivity_plus: ^6.0.4
   tflite_v2: ^1.0.0
   image_picker: ^0.8.5+3
+  volume_watcher: ^2.0.1
 
 dev_dependencies:
   flutter_test:
