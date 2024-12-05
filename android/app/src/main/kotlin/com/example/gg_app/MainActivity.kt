@@ -1,4 +1,4 @@
-package com.example.gg_app
+package com.example.greengeemapp
 
 import io.flutter.embedding.android.FlutterActivity
 
