@@ -205,7 +205,7 @@ class SettingsScreen extends StatelessWidget {
                       ),
                     ),
                     ListTile(
-                      title: Text('Tagalog',
+                      title: Text('Filipino',
                           style: TextStyle(fontFamily: 'Karla', fontSize: 20)),
                       leading: Radio<bool>(
                         value: false,

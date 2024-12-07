@@ -303,7 +303,7 @@ class _PlantScannerState extends State<PlantScanner> {
                                           return Text(
                                             result['label'],
                                             style: TextStyle(
-                                              color: Colors.green[800],
+                                              color: Colors.transparent,
                                               fontSize: screenWidth * 0.05,
                                             ),
                                           );

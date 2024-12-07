@@ -2,7 +2,7 @@ import 'models/plants.dart';
 
 final List<Plant> allPlants = [
   Plant(
-    eng_name: 'Aloe Vera',
+    eng_name: 'Aloe vera',
     tag_name: 'Sabila',
     sci_name: 'Aloes Barbadensis, Mill',
     description:
@@ -1458,7 +1458,7 @@ final List<Plant> herbalTeas = allPlants
 
 final List<Plant> aromaticOils = allPlants
     .where((plant) => [
-          'Aloe Vera',
+          'Aloe vera',
           'Fan Palm',
           'Galip Nut',
           'Jujube Plum',

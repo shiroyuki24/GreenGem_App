@@ -49,9 +49,9 @@ class _HomeScreenState extends State<HomeScreen> {
         searchResults = [];
       } else {
         searchResults = allPlants.where((plant) {
-          return plant.eng_name.toLowerCase().contains(query.toLowerCase()) ||
-              plant.tag_name.toLowerCase().contains(query.toLowerCase()) ||
-              plant.sci_name.toLowerCase().contains(query.toLowerCase());
+          return plant.eng_name.toLowerCase().startsWith(query.toLowerCase()) ||
+              plant.tag_name.toLowerCase().startsWith(query.toLowerCase()) ||
+              plant.sci_name.toLowerCase().startsWith(query.toLowerCase());
         }).toList();
       }
     });
@@ -311,7 +311,11 @@ class _HomeScreenState extends State<HomeScreen> {
                     itemCount: searchResults.length,
                     itemBuilder: (context, index) {
                       return ListTile(
-                        title: Text(searchResults[index].eng_name),
+                        title: Text(
+                          Provider.of<LanguageManager>(context).isEnglish
+                              ? searchResults[index].eng_name
+                              : searchResults[index].tag_name,
+                        ),
                         onTap: () {
                           navigateToPlant(searchResults[index]);
                         },
