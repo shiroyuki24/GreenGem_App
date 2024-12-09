@@ -46,12 +46,18 @@ class _HomeScreenState extends State<HomeScreen> {
   void searchPlants(String query) {
     setState(() {
       if (query.isEmpty) {
-        searchResults = [];
+        searchResults = []; // Clear results if the query is empty
       } else {
+        final lowerCaseQuery = query.trim().toLowerCase();
+        final isEnglish =
+            Provider.of<LanguageManager>(context, listen: false).isEnglish;
+
         searchResults = allPlants.where((plant) {
-          return plant.eng_name.toLowerCase().startsWith(query.toLowerCase()) ||
-              plant.tag_name.toLowerCase().startsWith(query.toLowerCase()) ||
-              plant.sci_name.toLowerCase().startsWith(query.toLowerCase());
+          if (isEnglish) {
+            return plant.eng_name.toLowerCase().startsWith(lowerCaseQuery);
+          } else {
+            return plant.tag_name.toLowerCase().startsWith(lowerCaseQuery);
+          }
         }).toList();
       }
     });
@@ -300,27 +306,32 @@ class _HomeScreenState extends State<HomeScreen> {
               child: Material(
                 elevation: 5,
                 borderRadius: BorderRadius.circular(10),
-                child: Container(
-                  height: screenHeight * 0.3,
-                  decoration: BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: BorderRadius.circular(10),
+                child: ConstrainedBox(
+                  constraints: BoxConstraints(
+                    maxHeight: screenHeight * 0.3, // Limit the height
                   ),
-                  child: ListView.builder(
-                    padding: EdgeInsets.zero,
-                    itemCount: searchResults.length,
-                    itemBuilder: (context, index) {
-                      return ListTile(
-                        title: Text(
-                          Provider.of<LanguageManager>(context).isEnglish
-                              ? searchResults[index].eng_name
-                              : searchResults[index].tag_name,
-                        ),
-                        onTap: () {
-                          navigateToPlant(searchResults[index]);
-                        },
-                      );
-                    },
+                  child: Container(
+                    decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.circular(10),
+                    ),
+                    child: ListView.builder(
+                      padding: EdgeInsets.zero,
+                      shrinkWrap: true,
+                      itemCount: searchResults.length,
+                      itemBuilder: (context, index) {
+                        return ListTile(
+                          title: Text(
+                            Provider.of<LanguageManager>(context).isEnglish
+                                ? searchResults[index].eng_name
+                                : searchResults[index].tag_name,
+                          ),
+                          onTap: () {
+                            navigateToPlant(searchResults[index]);
+                          },
+                        );
+                      },
+                    ),
                   ),
                 ),
               ),
