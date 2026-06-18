@@ -85,41 +85,56 @@ Browse plants commonly used in herbal tea preparations.
 
 <img src="images/aromatic-herbs.png" width="250">
 
-Explore plants used for aromatic oils and fragrances.
+Explore plants commonly used for aromatic oils and herbal extracts.
 
 ---
 
 ### Plant Scanner
 
-<img src="images/plant-scanner.png" width="500">
+<p align="center">
+  <img src="images/plant-scanner1.png" width="250">
+  <img src="images/plant-scanner2.png" width="250">
+</p>
 
-Capture or upload an image to identify herbal plants using AI-powered image recognition.
+Capture a photo or upload an image from your gallery to identify herbal plants using AI-powered image recognition.
 
 ---
 
 ### Plant Information Module
 
-<img src="images/plant-details.png" width="700">
+<p align="center">
+  <img src="images/plant-details1.png" width="200">
+  <img src="images/plant-details2.png" width="200">
+  <img src="images/plant-details3.png" width="200">
+  <img src="images/plant-details4.png" width="200">
+</p>
 
-View detailed plant information including:
+View comprehensive information about each herbal plant, including:
 
-- Description
+- Plant Description
 - Scientific Name
 - Uses and Benefits
 - Preparation Methods
+- Educational Resources
 
 ---
 
 ### Settings
 
-<img src="images/settings.png" width="500">
+<p align="center">
+  <img src="images/setting1.png" width="180">
+  <img src="images/setting2.png" width="180">
+  <img src="images/setting3.png" width="180">
+  <img src="images/setting4.png" width="180">
+  <img src="images/setting5.png" width="180">
+</p>
 
-Configure language preferences and access:
+Configure application settings and access additional information:
 
+- Language Selection (English / Tagalog)
 - Terms & Conditions
 - Disclaimer
-- About the Application
-
+- About GreenGem
 ---
 
 ## 🤖 Machine Learning Model
