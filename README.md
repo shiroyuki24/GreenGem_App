@@ -196,12 +196,18 @@ The application consists of the following modules:
 
 ---
 
-## 👨‍💻 Developers
 
-Developed by:
+## 👨‍💻 Project Team
 
-**Dave Matthew L. Maniego**  
-Bachelor of Science in Information Technology
+This project was developed by the following BSIT students as part of their capstone project:
+
+| Member | Role |
+|----------|----------|
+| Dave Matthew L. Maniego | Programmer | UI Designer |
+| AJ T. Miranda | Technical Writer |
+| Ambher Chris V. Narciso | Project Manager | UI Designer |
+| Cris Kim G. Yumul | Technical Writer |
+
 
 ---
 
