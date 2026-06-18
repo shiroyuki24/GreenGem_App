@@ -203,9 +203,9 @@ This project was developed by the following BSIT students as part of their capst
 
 | Member | Role |
 |----------|----------|
-| Dave Matthew L. Maniego | Programmer | UI Designer |
+| Dave Matthew L. Maniego | Programmer, UI Designer |
+| Ambher Chris V. Narciso | Project Manager, UI Designer |
 | AJ T. Miranda | Technical Writer |
-| Ambher Chris V. Narciso | Project Manager | UI Designer |
 | Cris Kim G. Yumul | Technical Writer |
 
 
